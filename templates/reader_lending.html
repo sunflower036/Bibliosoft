@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LendingBooks</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Submit">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+</script>
+
+	<script src="../static/js/fanye.js"></script>
+	<link type="text/css" rel="stylesheet" href="../static/css/librarian_editbook.css" />
+<link href="../static/css/Dinput.css" rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" >
+	<script type="text/javascript" src="../static/js/jquery-2.1.4.min.js"></script>
+	<script src="../static/js/bootstrap.min.js"></script>
+	<link type="text/css" rel="stylesheet" charset="utf-8" href="../static/css/search_style.css" />
+
+	<link type="text/css" rel="stylesheet" href="../static/css/reader_style.css" />
+	<script src="../static/js/modernizr-2.6.2.min.js"></script>
+	<style>
+    	.norequest {
+    		width: 400px;
+    		vertical-align: middle;
+    		font-size: 25px; 
+    		margin: 180px 0 0 680px; 
+    		color: #4B4B4B; 
+    		padding: 30px; 
+    		background: rgba(248, 248, 248, 0.50);
+    		text-align: center;
+    		border-radius: 12px;
+    	}
+    </style>
+    <script>
+    	$(function(){    
+            var ansHide = $("#ans_hide").html();    
+            if(ansHide == null || ansHide.length == 0)  
+	        {  
+	            $("#ans_hide").css("display", "none"); 
+	        }
+    	}); 
+    </script>
+</head>
+<body background="../static/images/backward_rev.png" onload="goPage(1,4);">
+	<nav class="navbar navbar-transparent" role="navigation">
+  		<div class="container-fluid">
+    		<div class="nav navbar-nav reader_header_img">
+      			<img src="../static/images/lob.png" alt="logo"style="width: 200px;"/>
+    		</div>
+    		<ul class="nav navbar-nav navbar-right reader_header_right">
+      			<!--<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>username</a></li>-->
+      			<li class="dropdown">
+      				<a href="#">
+      					<span class="glyphicon glyphicon-user"></span>
+      					<span>{{login}}</span>
+      					<span class="caret"></span>
+      				</a>
+					<ul class="dropdown-menu">
+						<li><a href="{% url 'reader_changeinfo' %}"><span class="glyphicon glyphicon-cog"></span><span style="margin-left: 5px;">Change Imformation</span></a></li>
+						<li><a href="{% url 'reader_home' %}"><span class="glyphicon glyphicon-home"></span><span style="margin-left: 5px;">Return Homepage</span></a></li>
+						<li><a href="{% url 'homepage' %}"><span class="glyphicon glyphicon-log-out"></span><span style="margin-left: 5px;">Logout</span></a></li>
+					</ul>
+				</li>
+    		</ul>
+  		</div>
+	</nav>
+	
+	<div id="Bibliosoft" class="container-fluid reader_menu">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="nav nav-tabs nav-stacked menu_list" style="list-style-type: none;">
+					<li><a href="{% url 'reader_search' %}"><span>Search Books</span></a></li>
+					<li><a href="{% url 'reader_reserve' %}"><span>Reserve Books</span></a></li>
+					<li class="li_active"><a href="{% url 'reader_lending' %}"><span>Lending Books</span></a></li>
+					<li><a href="{% url 'reader_returnhistory' %}"><span>Return History</span></a></li>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div >
+		<form action="{% url 'reader_search' %}" method="post">
+			<div class="search" >
+			<input  type="text" placeholder="   search for books..." name="search" >
+			<button  type="submit"><i class="fa fa-search" ></i>SEARCH</button>
+			</div>
+		</form>
+    </div>
+	<div id="ans_hide" class="norequest">{{ans}}</div>
+	{% if reader_lendingbooks %}
+	<div class="div_default" style="margin-left: 22%; margin-top: 6%; width: 70%;">
+		<div class="div_title">
+			<span>Lending Books</span>
+		</div>
+		<div id="div1" class="div_height1" style="height: auto;padding-bottom: 2%;width: 95%;">
+
+			 <table id="idData" class="librarian_table" style="margin-left: 0%;margin-top: 0%;padding-bottom: 10px;">
+				<thead>
+					<th class="font" style="text-align: center;">book name</th>
+					<th class="font" style="text-align: center;">lend date</th>
+					<th class="font" style="text-align: center;">remaining lending days</th>
+					<th class="font" style="text-align: center;">to-pay fine</th>
+				</thead>
+				<tbody>
+					{% for item in reader_lendingbooks %}
+						<tr>
+							<td class="font" style="text-align: center;">{{ item.book_name }}</td>
+							<td class="font" style="text-align: center;">{{ item.date }}</td>
+							<td class="font" style="text-align: center;">{{ item.remain_lendingtime }}</td>
+							<td class="font" style="text-align: center;">{{ item.topay_fine }}</td>
+
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+			<table class="librarian_table" style="height: auto;margin-left: 0px;">
+				<tr><td><div id="barcon" name="barcon"></div></td></tr>
+			</table> 
+		</div>
+	</div>
+    {% endif %}
+	<nav class="navbar navbar-transparent navbar-fixed-bottom reader_bottom_bg" role="navigation">
+    	<div class="container-fluid">
+		    <ul class="nav navbar-nav navbar-right reader_bottom_right" style="padding-right: 35px;">
+		        <li><a href="#">Group Information</a></li>
+                <li>
+      				<a href="#" data-toggle="tooltip" data-placement="top" title="1071906198@qq.com">Contact us</a>
+				</li>
+		    </ul>
+    	</div>
+	</nav>
+	
+	<script>
+		$(function () { $("[data-toggle='tooltip']").tooltip(); });
+	</script> 
+	
+</body>
+</html>

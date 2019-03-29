@@ -1,0 +1,54 @@
+/*librarian*/
+
+body{
+	background-size: cover;
+}
+
+.menu_list {
+		width: 17%;
+		height: 70%;
+		
+		margin: 0;
+		border-radius: 20px;
+		border:2px solid #000000;
+		
+		position: 'relative';
+		float: left ;
+		margin-right: -3px;
+		}
+.function{
+			
+			margin: 0 100px;
+			float: right ;
+		}
+a{ text-decoration:none; 
+		margin-left: 1px;}
+a:hover{ text-decoration:underline; } 
+		.rest{
+			
+		}
+	
+		.sub_menue
+		{
+		display:none; 
+		             
+		}
+		li:hover .sub_menue
+		{
+		display:block;  
+		          
+		}
+
+.admin_table {
+	border:0px;
+	margin-left: 500px;
+	margin-top:100px;
+	height: 100px;
+	width: 1500px;
+	opacity:0.7;
+	border-collapse: collapse;
+}
+.admin_table thead tr {font-size: 17px; color: black;  text-align: center; background-color:#e6e8fb; font-weight:bold;}
+.admin_table td{line-height: 20px; text-align: center; padding: 4px 10px 3px 10px; height: 18px;border: 0px solid #ffffff;}
+.admin_table tbody tr {background: #fff; font-size: 13px; color: #393939;}
+.admin_table tbody tr:nth-child(2n){ background: #f3f3f3;}

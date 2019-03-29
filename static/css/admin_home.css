@@ -1,0 +1,58 @@
+.view_div {
+	width: 62%;
+	height: 550px;
+    margin-left:400px;
+	background-color: white;
+	padding: 30px 40px 0px 40px;
+    background: rgba(255, 255, 255, 0.40);
+	border-radius:20px;
+	position:relative;
+}
+.view_div_default {
+	color: #4C5365;
+	filter:alpha(opacity=90);
+	-moz-opacity:0.9;
+	opacity:0.9;
+}
+.view_div_username {
+	font-size: 28px;
+	font-family: georgia;
+	font-weight: 700;
+	margin: 100px 550px 30px 0;
+	text-align:center;
+}
+.view_div_welcome {
+	color: #192442;
+	font-size: 35px;
+	font-family: georgia;
+	font-weight: 800;
+	text-align:center;
+	padding: 30px 0 0 0;
+	/*filter:alpha(opacity=100);
+	-moz-opacity:1.0;
+	opacity:1.0;*/
+}
+.view_datediv{
+	font-size: 25px;
+	font-family: arial;
+	font-weight: 500;
+	margin-top: 25px;
+	padding: 10px 0 0 0;
+	text-align:center;
+}
+.view_div_proverb {
+	font-size: 25px;
+	font-family: arial;
+	font-weight: 500;
+	position:absolute;
+	bottom: 0;
+}
+.view_div_proverb_span1 {
+	padding: 0px 10px 10px 220px;
+	display: block;
+}
+.view_div_proverb_span2 {
+	padding: 10px 0px 10px 0;
+	display: block;
+	text-align: right;
+}

@@ -1,0 +1,142 @@
+﻿.wizard-container {
+  padding-top: 100px;
+  z-index: 3;
+}
+.wizard-container .wizard-navigation {
+  position: relative;
+}
+
+/* 整个add book框 */
+.card {
+  background-color: #FFFFFF;
+  padding: 10px 0;
+  width: 80%;
+  border-radius: 6px;
+  color: rgba(0,0,0, 0.87);
+  background: #fff;
+	margin-left: 10%;
+	margin-top: -120px;
+	opacity: 1.0;
+}
+
+.wizard-card {
+  min-height: 410px;
+	height: 100%;
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.wizard-card .moving-tab {
+  position: absolute;
+  text-align: center;
+  padding: 12px;
+  font-size: 12px;
+  text-transform: uppercase;
+  top: -4px;
+  left: 0px;
+  border-radius: 4px;
+  color: #FFFFFF;
+  font-weight: 500;
+}
+
+.wizard-card[data-color="red"] .moving-tab {
+  background-color: #f44336;
+  box-shadow: 0 16px 26px -10px rgba(244, 67, 54, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(244, 67, 54, 0.2);
+}
+
+/* 框内选项卡大小 */
+.wizard-card .tab-content {
+  /* max-height: 340px; */
+	height: 340px;
+  padding: 20px 15px;
+	overflow-y:auto;
+}
+
+/* 大标题 */
+.wizard-card .wizard-header {
+  text-align: center;
+  padding: 25px 0 35px;
+}
+/* .wizard-card .wizard-header h3 {
+  margin: 5px 0 0;
+} */
+
+.wizard-card .info-text {
+  text-align: center;
+  font-weight: 300;
+  margin: 10px 0 30px;
+}
+
+.wizard-card .wizard-title {
+  margin: 0;
+	font-family: "arial black";
+}
+
+/*            Navigation menu                */
+/* 未被选中的选项卡的标题底色 */
+.nav-pills {
+  background-color: rgba(200, 200, 200, 0.2);
+}
+/* 控制两个选项卡并排 */
+.nav-pills > li + li {
+  margin-left: 0;
+}
+.nav-pills > li > a {
+  border: 0 !important;
+  border-radius: 0;
+  line-height: 18px;
+  text-transform: uppercase;
+	font-family: "arial";
+  font-size: 12px;
+  font-weight: 500;
+  min-width: 100px;
+  text-align: center;
+  color: #555555 !important;
+}
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus,
+.nav-pills > li > a:hover,
+.nav-pills > li > a:focus {
+  background-color: inherit;
+}
+
+/* 上传图片 */
+.wizard-card .picture-container {
+  position: relative;
+  cursor: pointer;
+  /* text-align: center; */
+}
+
+.wizard-card .picture {
+  width: 106px;
+  height: 106px;
+  /* background-color: #999999; */
+  border: 4px solid #CCCCCC;
+  color: #FFFFFF;
+  /* border-radius: 50%; */
+  /* margin: 5px auto; */
+	margin-left: 30%;
+  overflow: hidden;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+}
+
+.wizard-card .picture:hover {
+  /* border-color: #2ca8ff; */
+	/* border-color: #f44336; */
+}
+
+.wizard-card .picture input[type="file"] {
+  cursor: pointer;
+  display: block;
+  height: 90%;
+  left: 0;
+  opacity: 0 !important;
+  position: absolute;
+  top: 0;
+  width: 35%;
+}
+
+.wizard-card .picture-src {
+  width: 100%;
+}

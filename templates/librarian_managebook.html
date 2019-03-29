@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" />
+	<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+	<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<script src="../static/js/modernizr.custom.js"></script>
+	<script src="../static/js/fanye.js"></script>
+	<script src="../static/js/modernizr-2.6.2.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../static/css/librarian_style.css" />
+	<link type="text/css" rel="stylesheet" href="../static/css/librarian_home.css" />
+	<link type="text/css" rel="stylesheet" charset="utf-8" href="../static/css/manage_style.css" />
+	<link type="text/css" rel="stylesheet" charset="utf-8" href="../static/css/search_style.css" />
+	<link rel="stylesheet" type="text/css" href="../static/css/component_addbook.css" />
+	<link rel="stylesheet" type="text/css" href="../static/css/content_addbook.css" />
+	<link rel="stylesheet" type="text/css" href="../static/css/blackwindow.css">
+	<link type="text/css" rel="stylesheet" href="../static/css/librarian_editbook.css" />
+	<link type="text/css" rel="stylesheet" href="../static/css/managereader_check.css" />
+	<style>
+		.search{
+			margin-top: 0;
+		}
+	</style>
+	<title>ManageBook</title>
+	<script type="text/javascript">
+	function doPrint() {
+			winnew = window.open("", "")
+			bdhtml = window.document.body.innerHTML;
+			sprnstr = "<!--startprint-->"; //开始打印标识字符串有17个字符
+			eprnstr = "<!--endprint-->"; //结束打印标识字符串
+			prnhtml = bdhtml.substr(bdhtml.indexOf(sprnstr) + 17); //从开始打    印标识之后的内容
+			prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr)); //截取开始标识和结束标识之间的内容
+			winnew.document.body.innerHTML = prnhtml; //把需要打印的指定内容赋给body.innerHTML
+			winnew.print(); //调用浏览器的打印功能打印指定区域
+	}
+	</script>
+	<script>  
+    function show(tag){  
+    var light=document.getElementById(tag);  
+    light.style.display='block';  
+    $("#fade").css('display','block'); 
+    }  
+    function hide(tag){  
+    var light=document.getElementById(tag);  
+    light.style.display='none';  
+    $("#fade").css('display','none');  
+    }
+</script>
+</head>
+<body background="../static/images/backward.png" onload ="goPage(1,6);">
+	<nav class="navbar navbar-transparent" role="navigation">
+  		<div class="container-fluid">
+    		<div class="nav navbar-nav librarian_header_img">
+      			<img src="../static/images/lo.png" alt="logo" width="200px" />
+    		</div>
+    		<ul class="nav navbar-nav navbar-right librarian_header_right">
+      			<!--<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>username</a></li>-->
+      			<li class="dropdown">
+      				<a href="#">
+      					<span class="glyphicon glyphicon-user"></span>
+      					<span>{{login}}</span>
+      					<span class="caret"></span>
+      				</a>
+					<ul class="dropdown-menu">
+						<li><a href="{% url 'librarian_changepwd' %}"><span class="glyphicon glyphicon-cog"></span><span style="margin-left: 5px;">Change Password</span></a></li>
+						<li><a href="{% url 'librarian_home' %}"><span class="glyphicon glyphicon-home"></span><span style="margin-left: 5px;">Return Homepage</span></a></li>
+						<li><a href="{% url 'homepage' %}"><span class="glyphicon glyphicon-log-out"></span><span style="margin-left: 5px;">Logout</span></a></li>
+					</ul>
+				</li>
+    		</ul>
+  		</div>
+	</nav>
+	
+	<div>
+		<form action="{% url 'librarian_managebook' %}" method="post">
+		<div class="search" >
+        <input type="text" placeholder="   search for books..." name="search" >
+        <input id="lib_searchbook" type="submit" value="SEARCH">
+		</div>
+	</form>
+	</div>
+	
+	<div id="Bibliosoft" class="container-fluid librarian_menu">
+		<div class="row">
+			<div class="col-md-12">
+				<!-- <aside id="fh5co-aside" role="complementary" class="border js-fullheight">
+				<nav id="fh5co-main-menu" role="navigation"> -->
+				<ul class="nav nav-tabs nav-stacked menu_list" style="list-style-type: none;">
+					<!-- <li class="fh5co-active"> -->
+					<li>
+						<a href="#ManageBooks" class="nav-header collapsed li_active" data-toggle="collapse">
+							<span>Manage Books</span>
+							<span class="pull-right glyphicon glyphicon-chevron-down"></span>
+						</a>
+						<ul id="ManageBooks" class="nav nav-list collapse" style="height: 0px;">
+						<!-- <ul id="ManageBooks" class="nav nav-list collapse" style="height: 0px;"> -->
+							<li><a href="{% url 'librarian_addbook' %}" class="submenu_add"><span>Add Books</span></a></li>
+
+							<li>
+								<button type="button" value="check delete list" class="button1" onclick="show('check')">Check Delete List</button>
+									<div id="check" class="black_content">  
+										<div class="close">
+											<a href="javascript:void(0)" onclick="hide('check')" style="text-decoration: none; color: white; font-size: 30px;">×</a>
+										</div> 
+											<div class="title">Check Delete List</div>
+												<div class="white_content">
+													<table class="managereader_table">
+														<thead>
+															<tr>
+																<th>book name</th>
+																<th>book id</th>
+																<th>delete librarian</th>
+															</tr>
+														</thead>
+														<tbody>
+															{% for item in deletelist %}
+																<tr>
+																	<td>{{ item.book_name }}</td>
+																	<td>{{ item.book_id }}</td>
+																	<td>{{ item.librarian_id }}</td>
+																</tr>
+															{% endfor %}
+														</tbody>
+													</table>
+												</div>	
+									</div>
+							</li>
+						</ul>
+					</li>
+					<li><a href="{% url 'librarian_lend' %}"><span>Lend Book</span></a></li>
+					<li><a href="{% url 'librarian_return' %}"><span>Return Book</span></a></li>
+					<li>
+						<a href="#ReaderSetting" class="nav-header collapsed" data-toggle="collapse">
+							<span>Reader Setting</span>
+							<span class="pull-right glyphicon glyphicon-chevron-down"></span>
+						</a>
+						<ul id="ReaderSetting" class="nav nav-list collapse menu_submenu" style="height: 0px;">
+							<li><a href="{% url 'librarian_managereader' %}"><span>Manage Reader</span></a></li>
+							<li><a href="{% url 'librarian_addreader' %}"><span>Reader Register</span></a></li>
+						</ul>
+					</li>
+					<li><a href="{% url 'librarian_checkincome' %}"><span>Check Income</span></a></li>
+					<li><a href="{% url 'librarian_post' %}"><span>Edit Post</span></a></li>
+				</ul>
+				<!-- </nav>
+				</aside> -->
+			</div>
+		</div>
+	</div>
+
+	
+	 {% if new_book %}
+<div style="margin-left: 0">
+	    <div class="morph-button morph-button-modal morph-button-modal-3 morph-button-fixed function">
+			<button class="search " type="button" style="width:200px;border-color: #d93c3c; background: #d93c3c;">print barcode(s)</button>
+				<div class="morph-content">
+	                <div class="content-style-form content-style-form-2">
+	                    <span class="icon icon-close">Close the dialog</span>
+	                    
+	
+	                    <!--startprint-->
+	                    {% for book in new_book %}
+	                            <div>
+	                                <img src="http://127.0.0.1:8000/static/images/{{ book }}.png">
+	                            </div>
+	                    {% endfor %}
+	                    <!--endprint-->
+											<br>
+											<button class="button" onclick="doPrint()">print</button>
+	
+	                </div>
+								</div>
+				</div>
+		</div>
+	    {% endif %}
+			
+</div>
+	
+	<div class="div_default" style="margin-left: 22%; margin-top: 6%; width: 70%;">
+		<div class="div_title">
+			<span>Manage Books</span>
+		</div>
+		<div id="div1" class="div_height1" style="height: auto;padding-bottom: 2%;width: 95%;">	
+		{% if searchresult %}
+			<table id="idData" class="librarian_table" style="margin-left: 0%;margin-top: 0%;padding-bottom: 10px; position:relative; z-index: 1">
+				<thead>
+					<tr>
+					<th>book name</th>
+					<th>book id</th>
+					<th>book floor</th>
+					<th>book shelf</th>
+					<th>book area</th>
+					<th>book keeping num</th>
+					<th>lend record</th>
+					<th>edit book information</th>
+					<th>delete book</th>
+					</tr>
+				</thead>
+				<tbody>
+								{% for item in searchresult %}
+									<tr>
+										<td>{{ item.name }}</td>
+										<td>{{ item.id }}</td>
+										<td>{{item.floor}}</td>
+										<td>{{ item.shelf }}</td>
+										<td>{{ item.area }}</td>
+										<td>
+											{% if item.islent == '0' %}
+															1
+													{% else %}
+															0
+													{% endif %}
+										</td>
+										<td>
+											<button type="submit" name="lend" value="" style=" border: none; width:100px;height:30px; background:url(../static/images/check.png) no-repeat center ;" onclick="show('lend{{ item.id }}')"></button>
+											<div id="lend{{ item.id }}" class="black_content_managebook_lend">
+													<div class="close">
+														<a href="javascript:void(0)" onclick="hide('lend{{ item.id }}')" style="text-decoration: none; color: white;font-size: 30px;">×</a>
+													</div>
+													<div class="title_lend">Check Lend Record</div>
+													<div class="white_content_lend">
+														<table class="managereader_table">
+															<thead>
+																<tr>
+																	<th>list num</th>
+																	<th>reader id</th>
+																	<th>book id</th>
+																	<th>book name</th>
+																	<th>date</th>
+																</tr>
+															</thead>
+															<tbody>
+																{% for line in check %}
+																{% if line.book_id == item.book_id %}
+																<tr>
+																	<td>{{ line.list_id }}</td>
+																	<td>{{ line.reader_id }}</td>
+																	<td>{{ line.book_id }}</td>
+																	<td>{{ line.book_name }}</td>
+																	<td>{{ line.date }}</td>
+																</tr>
+																{% endif %}
+																{% endfor %}
+															</tbody>
+														</table>
+													</div>
+												</div>
+										</td>
+										<td>
+											<form action="{% url 'librarian_editbook' %}" method="post">
+												<input type="text" name="book id" value="{{ item.id }}" hidden>
+												<a href="librarian_editbook.html"></a>
+												<input type="submit" name="edit" value="" style=" border: none; width:100px;height:30px; background:url(../static/images/edit.png) no-repeat center ;">
+											</form>
+										</td>
+										<td>
+                                            {% if item.islent == '1' %}
+                                                <button style=" border: none; width:100px;height:30px; background:url(../static/images/delete.png) no-repeat center ;" onclick="alert('You cannot delete the book. It has been lent.')"></button>
+                                            {% elif item.islent == '0' %}
+											<form action="{% url 'librarian_managebook' %}" method="post">
+												<input type="text" name="book id" value="{{ item.id }}" hidden>
+												<input type="text" name="book name" value="{{ item.name }}" hidden>
+													<script type="text/javascript">
+														function confirmDelete() {
+															return confirm("Are you sure to delete?");
+														}
+													</script>
+												<input type="submit" name="delete" value="" style=" border: none; width:100px;height:30px; background:url(../static/images/delete.png) no-repeat center ;" onclick="return confirmDelete();">
+											</form>
+                                            {% endif %}
+										</td>
+									</tr>
+								{% endfor %}
+				</tbody>
+			</table>
+		{% endif %}
+		<table class="librarian_table" style="height: auto;margin-left: 0px;">
+			<tr><td><div id="barcon" name="barcon"></div></td></tr>
+		</table> 
+		</div>
+	</div>
+	
+	
+<div style="font-size:26px;color:#000000;margin-left: 500px;">{{ ans }}</div>
+
+	<nav class="navbar navbar-transparent navbar-fixed-bottom librarian_bottom_bg" role="navigation">
+    	<div class="container-fluid">
+		    <ul class="nav navbar-nav navbar-right librarian_bottom_right">
+		        <li><a href="#">Group Information</a></li>
+                <li>
+      				<a href="#" data-toggle="tooltip" data-placement="top" title="1071906198@qq.com">Contact us</a>
+				</li>
+		    </ul>
+    	</div>
+	</nav>
+	
+	<script>
+		$(function () { $("[data-toggle='tooltip']").tooltip(); });
+	</script>
+	<script src="../static/js/classie.js"></script>
+	<script src="../static/js/uiMorphingButton_fixed.js"></script>
+	<script>
+				(function() {
+					var docElem = window.document.documentElement, didScroll, scrollPosition;
+	
+					// trick to prevent scrolling when opening/closing button
+					function noScrollFn() {
+						window.scrollTo( scrollPosition ? scrollPosition.x : 0, scrollPosition ? scrollPosition.y : 0 );
+					}
+	
+					function noScroll() {
+						window.removeEventListener( 'scroll', scrollHandler );
+						window.addEventListener( 'scroll', noScrollFn );
+					}
+	
+					function scrollFn() {
+						window.addEventListener( 'scroll', scrollHandler );
+					}
+	
+					function canScroll() {
+						window.removeEventListener( 'scroll', noScrollFn );
+						scrollFn();
+					}
+	
+					function scrollHandler() {
+						if( !didScroll ) {
+							didScroll = true;
+							setTimeout( function() { scrollPage(); }, 60 );
+						}
+					};
+	
+					function scrollPage() {
+						scrollPosition = { x : window.pageXOffset || docElem.scrollLeft, y : window.pageYOffset || docElem.scrollTop };
+						didScroll = false;
+					};
+	
+					scrollFn();
+	
+					[].slice.call( document.querySelectorAll( '.morph-button' ) ).forEach( function( bttn ) {
+						new UIMorphingButton( bttn, {
+							closeEl : '.icon-close',
+							onBeforeOpen : function() {
+								// don't allow to scroll
+								noScroll();
+							},
+							onAfterOpen : function() {
+								// can scroll again
+								canScroll();
+							},
+							onBeforeClose : function() {
+								// don't allow to scroll
+								noScroll();
+							},
+							onAfterClose : function() {
+								// can scroll again
+								canScroll();
+							}
+						} );
+					} );
+	
+					// for demo purposes only
+					[].slice.call( document.querySelectorAll( 'form button' ) ).forEach( function( bttn ) { 
+						bttn.addEventListener( 'click', function( ev ) { ev.preventDefault(); } );
+					} );
+				})();
+			</script>
+</body>
+</html>

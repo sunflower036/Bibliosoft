@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+	<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" />
+	<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+	<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../static/css/librarian_style.css" />
+	<link type="text/css" rel="stylesheet" href="../static/css/librarian_home.css" />
+    
+    <title>Librarian Homepage</title>
+    
+    <script type="text/javascript">
+    	window.onload=function(){  
+			setInterval(function(){   
+			var date = new Date();   
+			var year = date.getFullYear(); //获取当前年份   
+			var month = date.getMonth()+1; //获取当前月份   
+			var todaydate = date.getDate(); //获取当前日
+			var weeks = ["Sun.","Mon.","Tur.","Wed.","Thr.","Fri.","Sat."];
+			var day = date.getDay(); //获取当前星期几 
+			var week = weeks[day];
+			var hour = date.getHours(); //获取小时
+			var minute = date.getMinutes(); //获取分钟
+			var second = date.getSeconds(); //获取秒   
+			
+			if(month<10){
+        		month = "0" + month;
+    		}
+    		if(todaydate<10){
+        		todaydate = "0" + todaydate;
+    		}
+    		if(hour<10){
+        		hour = "0" + hour;
+    		}
+    		if(minute<10){
+        		minute = "0" + minute;
+    		}
+    		if(second<10){
+        		second = "0" + second;
+    		}
+    
+			var d = document.getElementById('datadiv');    
+			d.innerHTML = year + ' / ' + month + ' / ' + todaydate + ' ' + week + ' ' + hour + ' : ' + minute + ' : '+second;  },500)  }
+    </script>
+    
+</head>
+<body background="../static/images/backward.png">
+	<nav class="navbar navbar-transparent" role="navigation">
+  		<div class="container-fluid">
+    		<div class="nav navbar-nav librarian_header_img">
+      			<img src="../static/images/lo.png" alt="logo" width="200px" />
+    		</div>
+    		<ul class="nav navbar-nav navbar-right librarian_header_right">
+      			<!--<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>username</a></li>-->
+      			<li class="dropdown">
+      				<a href="#">
+      					<span class="glyphicon glyphicon-user"></span>
+      					<span>{{login}}</span>
+      					<span class="caret"></span>
+      				</a>
+					<ul class="dropdown-menu">
+						<li><a href="{% url 'librarian_changepwd' %}"><span class="glyphicon glyphicon-cog"></span><span style="margin-left: 5px;">Change Password</span></a></li>
+						<li><a href="{% url 'librarian_home' %}"><span class="glyphicon glyphicon-home"></span><span style="margin-left: 5px;">Return Homepage</span></a></li>
+						<li><a href="{% url 'homepage' %}"><span class="glyphicon glyphicon-log-out"></span><span style="margin-left: 5px;">Logout</span></a></li>
+					</ul>
+				</li>
+    		</ul>
+  		</div>
+	</nav>
+	
+	<div id="Bibliosoft" class="container-fluid librarian_menu">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="nav nav-tabs nav-stacked menu_list" style="list-style-type: none;">
+					<li><a href="{% url 'librarian_managebook' %}"><span>Manage Books</span></a></li>
+					<li><a href="{% url 'librarian_lend' %}"><span>Lend Book</span></a></li>
+					<li><a href="{% url 'librarian_return' %}"><span>Return Book</span></a></li>
+					<!--<li><button type="button" value="{% url 'librarian_addcategory' %}" class="menu_button">Add Category</button></li>-->
+					<li>
+						<a href="#ReaderSetting" class="nav-header collapsed" data-toggle="collapse">
+							<span>Reader Setting</span>
+							<span class="pull-right glyphicon glyphicon-chevron-down"></span>
+						</a>
+						<ul id="ReaderSetting" class="nav nav-list collapse menu_submenu" style="height: 0px;">
+							<li><a href="{% url 'librarian_managereader' %}"><span>Manage Reader</span></a></li>
+							<li><a href="{% url 'librarian_addreader' %}"><span>Reader Register</span></a></li>
+						</ul>
+					</li>
+					<li><a href="{% url 'librarian_checkincome' %}"><span>Check Income</span></a></li>
+					<li><a href="{% url 'librarian_post' %}"><span>Edit Post</span></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="view_div">
+		<div class="view_div_default view_div_username">
+			<span>Librarian {{ans}}</span>
+		</div>
+		<div class="view_div_default view_div_welcome">
+			<span>Welcome to Bibliosoft Librarian System!</span>
+		</div>
+		<div id="datadiv" class="view_div_default view_datediv"></div>
+		<div class="view_div_default view_div_proverb">
+			<span class="view_div_proverb_span1">This moment will nap, you will have a dream; But this moment study, you will interpret a dream. </span>
+			<span class="view_div_proverb_span2">- Harvard University Library</span>
+		</div>
+	</div>
+
+	<nav class="navbar navbar-transparent navbar-fixed-bottom librarian_bottom_bg" role="navigation">
+    	<div class="container-fluid">
+		    <ul class="nav navbar-nav navbar-right librarian_bottom_right">
+		        <li><a href="#">Group Information</a></li>
+                <li>
+      				<a href="#" data-toggle="tooltip" data-placement="top" title="1071906198@qq.com">Contact us</a>
+				</li>
+		    </ul>
+    	</div>
+	</nav>
+	
+	<script>
+		$(function () { $("[data-toggle='tooltip']").tooltip(); });
+	</script>
+   
+
+</body>
+</html>

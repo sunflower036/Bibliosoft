@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HomePage</title>
+	<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" />
+	<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+	<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<link href="../static/css/homepage.css" rel="stylesheet" />
+	
+	<script>  
+    	function show(tag){  
+    		var light=document.getElementById(tag);  
+    		light.style.display='block';  
+    		$("#fade").css('display','block');  
+    	}  
+    	function hide(tag){  
+    		var light=document.getElementById(tag);  
+    		light.style.display='none';  
+    		$("#fade").css('display','none');  
+    	}
+	</script>
+	<script>  
+    	$(document).ready(function(){
+  			$("#btn_diyplay").click(function(){
+  				$("#hide_div").fadeToggle();
+  			});
+			$("#post_img").click(function(){
+  				$("#post_hide").fadeToggle();
+			});
+		});
+	</script>
+	
+	
+</head>
+<body background="../static/images/home.jpg">
+	
+	<nav class="navbar navbar-transparent" role="navigation">
+  		<div class="container-fluid">
+    		<div class="nav navbar-nav homepage_header_img">
+      			<img src="../static/images/lo.png" alt="logo" width="200px" />
+    		</div>
+    		<div class="homepage_header_right">
+	    		<form class="navbar-form navbar-right">
+	    			<div class="form-group">
+	            		<input type="text" class="form-control" placeholder="Search for books..." name="search" />
+	        		</div>
+	        		<button class="btn btn-danger" type="submit" onclick="alert('Please search after login!')" >Search</button>
+				</form>
+			</div>
+  		</div>
+	</nav>
+
+
+	
+	<div class="div_login_outer">
+		<div class="div_login">
+			<div class="div_login_title">
+				Login
+			</div>
+			<div class="div_form_outer">
+				<form action = "{% url 'homepage' %}" method="post">
+					<div class="input-group div_form_group">
+            			<span class="input-group-addon">
+            				<span class="glyphicon glyphicon-user"></span>
+            			</span>
+            			<input type="text" class="form-control" placeholder="Username" name="username">
+        			</div>
+        			<div class="div_form_group">
+        				<div class="input-group div_login_password">
+            				<span class="input-group-addon">
+            					<span class="glyphicon glyphicon-lock"></span>
+            				</span>
+            				<input type="password" class="form-control" placeholder="Password" name="password">
+        				</div>
+        				<select id="hp_select" name="identity" class="form-control div_login_select" onchange="changeBtn()">
+            				<option value="reader">Reader</option>
+            				<option value="librarian">Librarian</option>
+        				</select>
+        			</div>
+        			<div class="div_marginauto">
+        				<input class="btn btn-primary btn-lg div_form_group hp_btn_login" type="submit" value="Login" name="login" />
+        				<div id="btn_div1">
+        					<button type="button" class="btn btn-success btn-lg div_form_group hp_btn_change" onclick="show('recover_password')">Recover Password</button>
+							<div id="recover_password" class="admin_login_div">
+								<div class="close"><a href="javascript:void(0)" onclick="hide('recover_password')">×</a></div>
+								<div class="div_form_group">
+									<div class="div_login_title">
+										Recover Password
+									</div>
+									<form action = "{% url 'homepage' %}" method="post">
+										<div class="input-group div_hidden">
+	            							<span class="input-group-addon">
+	            								<span class="glyphicon glyphicon-user"></span>
+	            							</span>
+	            							<input type="text" class="form-control" placeholder="Reader_Id" name="reader_id">
+	        							</div>
+	        							<div class="input-group div_hidden">
+	            							<span class="input-group-addon">
+	            								<span class="glyphicon glyphicon-envelope"></span>
+	            							</span>
+	            							<input type="text" class="form-control" placeholder="Email" name="email">
+	        							</div>
+										<div class="div_marginauto">
+											<input class="btn btn-primary btn-lg div_form_btn div_form_group_hide" type="submit" value="Send request" name="signup" />
+										</div>
+									</form>
+								</div>
+							</div>
+        				</div>
+        			</div>
+    			</form>
+    			
+    			
+    			<div class="div_marginauto">
+    				<div id="btn_div2">
+        				<button type="button" class="btn btn-warning btn-lg div_form_group hp_btn_change" onclick="show('reset_password')">Reset Password</button>
+						<div id="reset_password" class="admin_login_div">
+							<div class="close"><a href="javascript:void(0)" onclick="hide('reset_password')">×</a></div>
+							<div class="div_form_group">
+								<div class="div_login_title">
+									Reset Password
+								</div>
+								<form action = "{% url 'homepage' %}" method="post">
+									<div class="input-group div_hidden">
+	            						<span class="input-group-addon">
+	            							<span class="glyphicon glyphicon-user"></span>
+	            						</span>
+	            						<input type="text" class="form-control" placeholder="Librarian_Id" name="username">
+	        						</div>
+									<div class="div_marginauto">
+										<input class="btn btn-primary btn-lg div_form_btn div_form_group_hide" type="submit" value="Reset Password" name="librarian_recover" />
+									</div>
+								</form>
+							</div>
+						</div>
+        			</div>
+				</div>
+				<div class="hide_ans">{{ ans }}</div>
+    			<div class="hide_ans">{{ new_ans }}</div>
+    		</div>
+    			<div class="div_marginauto">
+    				<div><button id="btn_diyplay" class="btn btn-primary admin_show_btn"><span id="admin_span" class="glyphicon glyphicon-plus-sign" style="color: rgb(rgba(248, 248, 248););"></span></button></div>
+    				<div id="hide_div" class="admin_login_hide">
+    					<button type="button" class="btn btn-link btn-lg div_form_group" onclick="show('admin_login')">admin login</button>
+    				</div>
+    				<div id="admin_login" class="admin_login_div">
+    					<div class="close"><a href="javascript:void(0)" onclick="hide('admin_login')">×</a></div>
+						<div class="div_form_group">
+							<div class="div_login_title">
+								Login
+							</div>
+							<form action = "{% url 'homepage' %}" method="post">
+								<div class="input-group div_hidden">
+            						<span class="input-group-addon">
+            							<span class="glyphicon glyphicon-user"></span>
+            						</span>
+            						<input type="text" class="form-control" placeholder="Username" name="adminname">
+        						</div>
+        						<div class="input-group div_hidden">
+            						<span class="input-group-addon">
+            							<span class="glyphicon glyphicon-lock"></span>
+            						</span>
+            						<input type="password" class="form-control" placeholder="Password" name="adminpwd">
+        						</div>
+								<div class="div_marginauto">
+									<input class="btn btn-primary btn-lg div_form_btn div_form_group" type="submit" value="login" name="admin_login" />
+								</div>
+							</form>
+						</div>
+						 
+					</div>
+    			</div>
+			</div>
+		</div>
+		
+	</div>
+	
+	
+	<div id="post_img">
+		<div class="post_img_position post_img_shape">
+			<img src="../static/images/post.png" width="64px" style="padding: 8px 0 0 8px;" />
+		</div>
+	</div>
+	
+		<div id="post_hide" class="post_hide_position">
+			{% for p in post %}
+			<div class="post_div_text"><a href="#" data-toggle="modal" data-target="#{{ p.id }}">{{ p.title }}</a></div>
+			<div class="modal fade" id="{{ p.id }}" tabindex="-1" role="dialog" aria-labelledby="{{ p.title }}01" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content post_hide">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								&times;
+							</button>
+							<div class="post_hide_title_text">
+								<label class="modal-title" id="{{ p.title }}01">
+								    {{ p.title }}
+								</label>
+							</div>
+						</div>
+						<div class="modal-body">
+							<div>
+								<label class="post_hide_content_sub">Date: {{ p.date }}</label>
+								<label class="post_hide_content_sub">Auther: {{ p.auth }}</label>
+								<label class="post_hide_content_sub">From: {{ p.address }}</label>
+							</div>
+							<div class="post_hide_content">
+								{% autoescape off %}
+			                        <div class="post_hide_content_text">{{ p.content }}</div>
+			                    {% endautoescape %}
+		                    </div>
+						</div>
+					</div>
+				</div>
+			</div>
+			 {% endfor %}
+		</div>
+
+	
+	<nav class="navbar navbar-transparent navbar-fixed-bottom homepage_bottom_bg" role="navigation">
+    	<div class="container-fluid">
+		    <ul class="nav navbar-nav navbar-right homepage_bottom_right">
+		        <li><a href="#">Group Information</a></li>
+                <li>
+      				<a href="#" data-toggle="tooltip" data-placement="top" title="1071906198@qq.com">Contact us</a>
+				</li>
+		    </ul>
+    	</div>
+	</nav>
+	
+	<script>
+		$(function () { $("[data-toggle='tooltip']").tooltip(); });
+	</script> 
+	
+	<script>
+    function changeBtn() {
+            var hpSelect = document.getElementById("hp_select");
+            var hpOption = hpSelect.value;
+            var btnDiv1 = document.getElementById("btn_div1");
+            var btnDiv2 = document.getElementById("btn_div2");
+            if(hpOption == "reader"){
+            	btnDiv2.style.display = "none";
+            	btnDiv1.style.display = "block";
+            }
+            else if(hpOption == "librarian"){
+            	btnDiv1.style.display = "none";
+            	btnDiv2.style.display = "block";
+            }
+        }
+	</script>
+  
+			
+</body>
+</html>

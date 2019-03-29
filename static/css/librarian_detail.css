@@ -1,0 +1,89 @@
+.div_outer {
+	width: 57%;
+	margin-left: 200px;
+}
+.div_default {
+    width: 80%;
+    height: 100%;
+    margin-left: 300px ;
+    margin-top: -35px;
+	background: rgba(255, 255, 255, 0.50);
+	border-radius:16px;
+	border-style: hidden;
+}
+
+
+.div_title {
+	text-align: center;
+	color: #333333;
+	font-weight: 800;
+	font-size: 30px;
+	margin: 20px;
+	padding: 20px 10px 5px 10px;
+	filter:alpha(Opacity=85);
+  	-moz-opacity:0.85;
+  	opacity: 0.85;
+  	border-bottom: 0.5px dashed #000000;
+}
+.div_content_sub {
+	margin: 5px 15px 10px 25px;
+}
+.div_content_sub_text {
+	color: #333333;
+	font-size: 13px;
+	font-weight: 400;
+	margin-right: 10px;
+	filter:alpha(Opacity=70);
+  	-moz-opacity:0.7;
+  	opacity: 0.7;
+}
+.div_content_text {
+	height: 350px;
+	margin: 10px 25px 10px 25px;
+	color: #333333;
+	filter:alpha(Opacity=80);
+  	-moz-opacity:0.8;
+  	opacity: 0.8;
+  	overflow-x: auto;
+    overflow-y: auto;
+    
+}
+.div_content_btn_group {
+	margin: 30px 0 0 72%;
+}
+.div_content_btn {
+	margin-left: 10px;
+	text-align: center;
+	width: 70px;
+	height: 40px;
+	font-size: 16px;
+}
+
+.edit_text {
+	position: absolute;
+	left: 570px;
+	top: 80px;
+	width: 560px;
+	height: 580px;
+	background-color: rgba(190, 190, 190, 0.90);
+	display: none;
+	border-radius: 8px;
+	
+}
+.title_text {
+	margin: 0 30px 10px 30px;
+	text-align: center;
+}
+.title_text > label {
+	font-size: 25px;
+	filter:alpha(Opacity=80);
+  	-moz-opacity:0.8;
+  	opacity: 0.8;
+}
+.textarea_text {
+	margin: 15px 30px 10px 30px;
+	padding-bottom: 10px;
+}
+.edit_btn {
+	margin-left: 87%;
+}

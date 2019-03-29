@@ -1,0 +1,65 @@
+.link{
+	border:0px;
+	background:black;
+	opacity:0.6;
+	color:white;
+	margin-top:10%;
+	text-align: center;
+	width: 150px;
+	height: 30px;
+	font-size:15px;
+	font-family:'comic sans ms'
+}
+
+.button{
+	width:150px;
+	height: 30px;
+	color: white;
+	background: transparent;
+	text-align: center;
+	font-size:15px;
+	font-family:'comic sans ms'
+}
+
+.post{
+	width:130px;
+	height: 120px;
+	margin-left: 850px;
+}
+
+.title{
+	font-size: 60px;
+	font-family: 'comic sans ms';
+	color:black;
+}
+
+.titwo{
+		font-size: 30px;
+		font-family: 'comic sans ms';
+		color:black;
+}
+
+.font{
+	font-size:20px;
+	font-family:'comic sans ms';
+	color: black;
+}
+.text{
+	width:400px;
+	height: 30px;
+	background: white;
+	text-align: center;
+	opacity:0.7;
+	font-family: 'comic sans ms';
+	font-size: 20px;
+	font-weight: 100;
+}
+.search{
+	background: white;
+	color: black;
+	width:200px;
+	height:30px ;
+	font-size: 20px;
+	font-weight: 100;
+	font-family:'comic sans ms';
+}

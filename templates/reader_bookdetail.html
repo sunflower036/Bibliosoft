@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<title>{{ book_name }}</title>
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+	<meta name="viewport" content="width=device-width" />
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" />
+	<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+	<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+	<link type="text/css" rel="stylesheet" href="../static/css/reader_home.css" />
+    <link type="text/css" rel="stylesheet" href="../static/css/reader_style.css" />
+    <!-- CSS Files -->
+    <link href="../static/css/material-bootstrap-wizard1.css" rel="stylesheet" />
+    <link href="../static/css/bookdetail.css" rel="stylesheet" />  
+</head>
+<body background="../static/images/backward_rev.png">
+	<nav class="navbar navbar-transparent" role="navigation">
+  		<div class="container-fluid">
+    		<div class="nav navbar-nav reader_header_img">
+      			<img src="../static/images/lob.png" alt="logo"style="width: 200px;"/>
+    		</div>
+    		<ul class="nav navbar-nav navbar-right reader_header_right">
+      			<!--<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>username</a></li>-->
+      			<li class="dropdown">
+      				<a href="#">
+      					<span class="glyphicon glyphicon-user"></span>
+      					<span>{{login}}</span>
+      					<span class="caret"></span>
+      				</a>
+					<ul class="dropdown-menu">
+						<li><a href="{% url 'reader_changeinfo' %}"><span class="glyphicon glyphicon-cog"></span><span>Change Imformation</span></a></li>
+						<li><a href="{% url 'reader_home' %}"><span class="glyphicon glyphicon-home"></span><span>Return Homepage</span></a></li>
+						<li><a href="{% url 'homepage' %}"><span class="glyphicon glyphicon-log-out"></span><span>Logout</span></a></li>
+					</ul>
+				</li>
+    		</ul>
+  		</div>
+	</nav>
+	
+	<div id="Bibliosoft" class="container-fluid reader_menu">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="nav nav-tabs nav-stacked menu_list" style="list-style-type: none;">
+					<li><a href="{% url 'reader_search' %}"><span>Search Books</span></a></li>
+					<li><a href="{% url 'reader_reserve' %}"><span>Reserve Books</span></a></li>
+					<li><a href="{% url 'reader_lending' %}"><span>Lending Books</span></a></li>
+					<li><a href="{% url 'reader_returnhistory' %}"><span>Return History</span></a></li>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+				<div class="wizard-container">
+					<div class="card wizard-card" style="margin:10px 0 0 95px;" data-color="red" id="wizard">
+						<div id="left" class="book_picture">
+							{% for j in img %}
+								{% if j.img_name == book_name %}
+									{% if j.url == 'none' %}
+										<img src="http://127.0.0.1:8000{{ j.img.url }}" width="210px" height="280px"/>
+									{% else %}
+										<img src="http://127.0.0.1:8000{{ j.url }}" width="210px" height="280px"/>
+									{% endif %}
+								{% endif %}
+							{% endfor %}
+						</div>
+						<div id="right" class="book_info">
+							<div><p><label>book id</label> {{ i.id }}</p></div>
+							<div><p><label>book name</label> {{ i.name }}</p></div>
+							<div><p><label>floor</label> {{ i.floor }}</p></div>
+							<div><p><label>shelf</label> {{ i.shelf }}</p></div>
+							<div><p><label>area</label> {{ i.area }}</p></div>
+							<div><p><label>price</label> {{ i.price }}</p></div>
+							<div><p><label>category</label> {{ i.category }}</p></div>
+							<div><p><label>keeping num:</label>
+								{% if i.islent == '0' %}
+									1
+								{% else %}
+									0
+								{% endif %}
+								</p>
+							</div>
+						</div>
+						<div id="center"><label>Description</label></div>
+						<div id="bottom" class="book_description">
+							
+							<div  style="overflow-y: auto;">{{ i.description }}</div>
+								<!-- <form action="{% url 'reader_search' %}" method="post">
+									<input name="book id" value="{{ i.id }}" hidden>
+									<input type="submit" name="reserve" value="reserve" style="right: auto;">
+								</form>
+								<a href="#" onclick="javascript:history.back(-1);">back</a> -->
+						</div>
+                    {% if i.islent == '0' %}
+						<div id="footer1" >
+							<form action="{% url 'reader_search' %}" method="post">
+								<input name="book id" value="{{ i.id }}" hidden>
+								<input name="search" value="{{ searchword }}" hidden>
+								<input type="submit" name="reserve" value="" class="reserve" style="background:url(../static/images/reserve.png) no-repeat center ;">
+							</form>
+						</div>
+                    {% endif %}
+						<div id="footer2" class="back">
+							<a href="#" onclick="javascript:history.back(-1);"><button class="back" style="background:url(../static/images/back.png) no-repeat center ;"></button></a>
+						</div>
+
+					</div>
+				</div><!-- wizard container -->
+			</div>
+		</div> <!-- row -->
+	</div>
+	<nav class="navbar navbar-transparent navbar-fixed-bottom reader_bottom_bg" role="navigation">
+    	<div class="container-fluid">
+		    <ul class="nav navbar-nav navbar-right reader_bottom_right">
+		        <li><a href="#">Group Information</a></li>
+                <li>
+      				<a href="#" data-toggle="tooltip" data-placement="top" title="1071906198@qq.com">Contact us</a>
+				</li>
+		    </ul>
+    	</div>
+	</nav>
+	
+	<script>
+		$(function () { $("[data-toggle='tooltip']").tooltip(); });
+	</script> 
+
+</body>
+</html>

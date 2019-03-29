@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" />
+	<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+	<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../static/css/admin_style.css" />
+	<link type="text/css" rel="stylesheet" href="../static/css/admin&reader_df.css" />
+    <title>ChangeInfo</title>
+<link href="../static/css/admin&reader_df.css" rel='stylesheet' type='text/css' />
+
+</head>
+<body background="../static/images/backward_rev.png">
+	<nav class="navbar navbar-transparent" role="navigation">
+  		<div class="container-fluid">
+    		<div class="nav navbar-nav admin_header_img">
+      			<img src="../static/images/lob.png" alt="logo"style="width: 200px;"/>
+    		</div>
+    		<ul class="nav navbar-nav navbar-right admin_header_right">
+      			<li class="dropdown">
+      				<a class="admin_header_right_drop" href="#">
+      					<span class="glyphicon glyphicon-user"></span>
+      					<span>{{login}}</span>
+      					<span class="caret"></span>
+      				</a>
+					<ul class="dropdown-menu">
+						<li><a href="{% url 'admin_changeinfo' %}"><span class="glyphicon glyphicon-cog"></span><span style="margin-left: 5px;">Change Imformation</span></a></li>
+						<li><a href="{% url 'admin_home' %}"><span class="glyphicon glyphicon-home"></span><span style="margin-left: 5px;">Return Homepage</span></a></li>
+						<li><a href="{% url 'homepage' %}"><span class="glyphicon glyphicon-log-out"></span><span style="margin-left: 5px;">Logout</span></a></li>
+					</ul>
+				</li>
+    		</ul>
+  		</div>
+	</nav>
+	
+	<div id="Bibliosoft" class="container-fluid admin_menu">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="nav nav-tabs nav-stacked menu_list" style="list-style-type: none;">
+					<li><a href="{% url 'admin_manage' %}"><span>Manage Librarian</span></a></li>
+					<li><a href="{% url 'admin_addlibrarian' %}"><span>Librarian Register</span></a></li>
+					<li><a href="{% url 'admin_defaultvalue' %}"><span>Set Book Related Regulation</span></a></li>
+					<li><a href="{% url 'admin_request' %}"><span>Process Reset Password Request</span></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+   <div class="login-section">
+	        <div class="login-w3l">
+	   
+							<h2 class="sub-head-w3-agileits">Change Info</h2>
+						<div class="login-form">
+							<!--<h3 class="sub-head-w3-agileits">Old Password</h3>-->
+							<form action = "{% url 'admin_changeinfo' %}" method="post">
+								<label>Old Password:</label>
+								<input type="password" class="user" name="old password" />
+								<label >New password</label>		
+								<input type="password" class="user" name="new password" />
+				                
+	                            <input type="submit" name="submit" value="Submit">
+								
+							</form>
+                            <div style="font-size:26px;font-weight:normal;color:#000000;">{{ ans }}</div>
+					</div>
+				</div>
+			</div>
+
+    <nav class="navbar navbar-transparent navbar-fixed-bottom admin_bottom_bg" role="navigation">
+    	<div class="container-fluid">
+		    <ul class="nav navbar-nav navbar-right admin_bottom_right">
+		        <li><a href="#">Group Information</a></li>
+                <li>
+      				<a href="#" data-toggle="tooltip" data-placement="top" title="1071906198@qq.com">Contact us</a>
+				</li>
+		    </ul>
+    	</div>
+	</nav>
+	
+	<script>
+		$(function () { $("[data-toggle='tooltip']").tooltip(); });
+	</script> 
+</body>
+</html>

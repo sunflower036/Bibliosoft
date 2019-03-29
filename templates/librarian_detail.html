@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+	<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" />
+	<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+	<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../static/css/librarian_style.css" />
+	<link type="text/css" rel="stylesheet" href="../static/css/librarian_detail.css" />
+	
+    <title>{{ title }}</title>
+    
+    <script src="/static/tiny_mce/tiny_mce.js"></script>
+    <script>
+        tinyMCE.init({
+            'mode':'textareas',
+            'theme':'advanced',
+            'width':500,
+            'height':400
+        })
+    </script>
+    <script>  
+    	$(document).ready(function(){
+  			$("#btn_diyplay").click(function(){
+    			$("#edit_textarea").fadeIn();
+  			});
+  			$("#close_a").click(function(){
+    			$("#edit_textarea").fadeOut();
+  			});
+		});
+	</script>
+</head>
+<body  background="../static/images/backward.png">
+	<nav class="navbar navbar-transparent" role="navigation">
+  		<div class="container-fluid">
+    		<div class="nav navbar-nav librarian_header_img">
+      			<img src="../static/images/lo.png" alt="logo" width="200px" />
+    		</div>
+    		<ul class="nav navbar-nav navbar-right librarian_header_right">
+      			<!--<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>username</a></li>-->
+      			<li class="dropdown">
+      				<a href="#">
+      					<span class="glyphicon glyphicon-user"></span>
+      					<span>{{login}}</span>
+      					<span class="caret"></span>
+      				</a>
+					<ul class="dropdown-menu">
+						<li><a href="{% url 'librarian_changepwd' %}"><span class="glyphicon glyphicon-cog"></span><span style="margin-left: 5px;">Change Password</span></a></li>
+						<li><a href="{% url 'librarian_home' %}"><span class="glyphicon glyphicon-home"></span><span style="margin-left: 5px;">Return Homepage</span></a></li>
+						<li><a href="{% url 'homepage' %}"><span class="glyphicon glyphicon-log-out"></span><span style="margin-left: 5px;">Logout</span></a></li>
+					</ul>
+				</li>
+    		</ul>
+  		</div>
+	</nav>
+	
+	<div id="Bibliosoft" class="container-fluid librarian_menu">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="nav nav-tabs nav-stacked menu_list" style="list-style-type: none;">
+					<li><a href="{% url 'librarian_managebook' %}"><span>Manage Books</span></a></li>
+					<li><a href="{% url 'librarian_lend' %}"><span>Lend Book</span></a></li>
+					<li><a href="{% url 'librarian_return' %}"><span>Return Book</span></a></li>
+					<!--<li><button type="button" value="{% url 'librarian_addcategory' %}" class="menu_button">Add Category</button></li>-->
+					<li>
+						<a href="#ReaderSetting" class="nav-header collapsed" data-toggle="collapse">
+							<span>Reader Setting</span>
+							<span class="pull-right glyphicon glyphicon-chevron-down"></span>
+						</a>
+						<ul id="ReaderSetting" class="nav nav-list collapse menu_submenu" style="height: 0px;">
+							<li><a href="{% url 'librarian_managereader' %}"><span>Manage Reader</span></a></li>
+							<li><a href="{% url 'librarian_addreader' %}"><span>Reader Register</span></a></li>
+						</ul>
+					</li>
+					<li><a href="{% url 'librarian_checkincome' %}"><span>Check Income</span></a></li>
+					<li class="li_active"><a href="{% url 'librarian_post' %}"><span>Edit Post</span></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+    {% if post %}
+        
+        <div class="div_outer">
+        	<div class="div_default">
+        		<div class="div_title">{{ post.title }}</div>
+        		<div class="div_content_sub">
+        			<label class="div_content_sub_text">{{ post.date }}</label>
+        			<label class="div_content_sub_text">{{ post.auth }}</label>
+        			<label class="div_content_sub_text">{{ post.address }}</label>
+        		</div>
+        		<div class="div_content_text">
+        			{% autoescape off %}
+            			<div>{{ post.content }}</div>
+        			{% endautoescape %}
+        		</div>
+        		<div class="div_content_btn_group">
+        			<button id="btn_diyplay" class="btn btn-primary div_content_btn">Edit</button>
+        			<button class="btn btn-default div_content_btn"><a style="text-decoration:none;" href="{% url 'librarian_post' %}">Back</button>
+        		</div>
+        		<div>
+        			<div id="edit_textarea" class="edit_text">
+						<div class="close" style="margin: 5px 5px 0 0;"><a id="close_a" style="text-decoration:none; color: #696969;" href="javascript:void(0)">×</a></div>
+						<div>
+							<form action="{% url 'librarian_detail' %}" method="post">
+                                <input type="text" name="post_id" value="{{ post.id }}" hidden />
+								<div class="form-group title_text">
+									<label>Edit Notice</label>
+
+									<input type="text" class="form-control" value="{{ post.title }}" placeholder="Title..." name="title" />
+								</div>
+								<div class="textarea_text">
+									<label>
+										<textarea name="content">{{ post.content }}</textarea>
+									</label>
+									<input type="submit" name="edit" value="Submit" class="btn btn-success edit_btn">
+								</div>
+							</form>
+						</div>
+					</div>
+        		</div>
+        	</div>
+        </div>
+        
+    {% endif %}
+    <nav class="navbar navbar-transparent navbar-fixed-bottom librarian_bottom_bg" role="navigation">
+    	<div class="container-fluid">
+		    <ul class="nav navbar-nav navbar-right librarian_bottom_right">
+		        <li><a href="#">Group Information</a></li>
+                <li>
+      				<a href="#" data-toggle="tooltip" data-placement="top" title="1071906198@qq.com">Contact us</a>
+				</li>
+		    </ul>
+    	</div>
+	</nav>
+	
+	<script>
+		$(function () { $("[data-toggle='tooltip']").tooltip(); });
+	</script>
+</body>
+</html>

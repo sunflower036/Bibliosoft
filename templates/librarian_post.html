@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" />
+	<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+	<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../static/css/librarian_style.css" />
+	<link type="text/css" rel="stylesheet" href="../static/css/librarian_post.css"/>
+    
+    <title>LibrarianPost</title>
+    <script src="/static/tiny_mce/tiny_mce.js"></script>
+    <script>
+        tinyMCE.init({
+            'mode':'textareas',
+            'theme':'advanced',
+            'width':500,
+            'height':400
+        })
+    </script>
+    <script>  
+    	function show(tag){  
+    		var light=document.getElementById(tag);  
+    		light.style.display='block';  
+    		$("#fade").css('display','block');  
+    	}  
+    	function hide(tag){  
+    		var light=document.getElementById(tag);  
+    		light.style.display='none';  
+    		$("#fade").css('display','none');  
+    	}
+	</script>
+	<script>  
+    	$(document).ready(function(){
+  			$("#btn_diyplay").click(function(){
+    			$("#add_textarea").fadeIn();
+  			});
+  			$("#close_a").click(function(){
+    			$("#add_textarea").fadeOut();
+  			});
+		});
+	</script>
+	<script type="text/javascript">
+		function confirmDelete() {
+			return confirm("Are you sure to delete?");
+		}
+	</script>
+</head>
+
+<body background="../static/images/backward.png">
+	<nav class="navbar navbar-transparent" role="navigation">
+  		<div class="container-fluid">
+    		<div class="nav navbar-nav librarian_header_img">
+      			<img src="../static/images/lo.png" alt="logo" width="200px" />
+    		</div>
+    		<ul class="nav navbar-nav navbar-right librarian_header_right">
+      			<li class="dropdown">
+      				<a href="#">
+      					<span class="glyphicon glyphicon-user"></span>
+      					<span>{{login}}</span>
+      					<span class="caret"></span>
+      				</a>
+					<ul class="dropdown-menu">
+						<li><a href="{% url 'librarian_changepwd' %}"><span class="glyphicon glyphicon-cog"></span><span style="margin-left: 5px;">Change Password</span></a></li>
+						<li><a href="{% url 'librarian_home' %}"><span class="glyphicon glyphicon-home"></span><span style="margin-left: 5px;">Return Homepage</span></a></li>
+						<li><a href="{% url 'homepage' %}"><span class="glyphicon glyphicon-log-out"></span><span style="margin-left: 5px;">Logout</span></a></li>
+					</ul>
+				</li>
+    		</ul>
+  		</div>
+	</nav>
+	<div id="Bibliosoft" class="container-fluid librarian_menu">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="nav nav-tabs nav-stacked menu_list" style="list-style-type: none;">
+					<li><a href="{% url 'librarian_managebook' %}"><span>Manage Books</span></a></li>
+					<li><a href="{% url 'librarian_lend' %}"><span>Lend Book</span></a></li>
+					<li><a href="{% url 'librarian_return' %}"><span>Return Book</span></a></li>
+					<li>
+						<a href="#ReaderSetting" class="nav-header collapsed" data-toggle="collapse">
+							<span>Reader Setting</span>
+							<span class="pull-right glyphicon glyphicon-chevron-down"></span>
+						</a>
+						<ul id="ReaderSetting" class="nav nav-list collapse menu_submenu" style="height: 0px;">
+							<li><a href="{% url 'librarian_managereader' %}"><span>Manage Reader</span></a></li>
+							<li><a href="{% url 'librarian_addreader' %}"><span>Reader Register</span></a></li>
+						</ul>
+					</li>
+					<li><a href="{% url 'librarian_checkincome' %}"><span>Check Income</span></a></li>
+					<li class="li_active"><a href="{% url 'librarian_post' %}"><span>Edit Post</span></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+    <div class="div_outer">
+    	<div class="div_default">
+    		<div class="post_div">
+    			<div class="post_div_title">
+    				<label class="post_div_title_label">Notice List</label>
+    				<div class="post_div_title_btn">
+				   		<button id="btn_diyplay" class="btn btn-primary">+ Add</button>
+				   	</div>
+    			</div>
+    			<div>
+    				{% for line in posts %}
+				        <form id="{{ line.id }}">
+				            <input name="post_id" value="{{ line.id }}" hidden>
+				        </form>
+
+				
+				        <div class="post_div_text">
+				        	<a class="post_div_text_a" onclick="submit_frm('{{ line.id }}');" href="#">{{ line.title }}</a>
+
+                            <form action="{% url 'librarian_post' %}" method="post">
+                                <input name="delete_id" value="{{ line.id }}" hidden>
+                                <input class="btn btn-danger post_div_text_submit" type="submit" name="delete" value="" onclick="return confirmDelete();">
+                            </form>
+				        </div>
+				        <script>
+				            function submit_frm(tag){
+				                var frm = document.getElementById(tag);
+				                frm.action = "{% url 'librarian_detail' %}";
+				                frm.method = "post";
+				                frm.submit();
+				            }
+				        </script>
+				    {% endfor %}
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    <div id="add_textarea" class="add_text">
+		<div class="close" style="margin: 5px 5px 0 0;"><a id="close_a" style="text-decoration:none; color: #696969;" href="javascript:void(0)">×</a></div>
+		<div>
+			<form action="{% url 'librarian_post' %}" method="post">
+				<div class="form-group title_text">
+					<label>Add Notice</label>
+					<input type="text" class="form-control" placeholder="Title..." name="title" />
+				</div>
+				<div class="textarea_text">
+					<label>
+						<textarea name="content"></textarea>
+					</label>
+					<input type="submit" name="add" value="Post" class="btn btn-default add_btn">
+				</div>
+			</form>
+		</div>
+	</div>
+   	
+	<nav class="navbar navbar-transparent navbar-fixed-bottom librarian_bottom_bg" role="navigation">
+    	<div class="container-fluid">
+		    <ul class="nav navbar-nav navbar-right librarian_bottom_right">
+		        <li><a href="#">Group Information</a></li>
+                <li>
+      				<a href="#" data-toggle="tooltip" data-placement="top" title="1071906198@qq.com">Contact us</a>
+				</li>
+		    </ul>
+    	</div>
+	</nav>
+	
+	<script>
+		$(function () { $("[data-toggle='tooltip']").tooltip(); });
+	</script>
+
+</body>
+</html>

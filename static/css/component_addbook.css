@@ -1,0 +1,109 @@
+/* 按钮样式 ，不影响弹出*/
+.morph-button > button {
+	position: relative;/*可重复弹框*/
+	/* padding: 0 1em;
+	border: none;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-size: 20px;
+	font-family: "comic sans ms";
+	color: white; */
+	width: 100%;
+	height: 40px;
+	margin: 0;
+	border-radius: 7px;
+	border-style: hidden;
+	background: transparent;
+	color: white;
+	
+	/* outline: none; */
+	font-size: 13px;
+	filter:alpha(opacity=80);
+	-moz-opacity:0.8;
+	opacity:0.8;
+	
+}
+.morph-button > button:hover{
+	background-color: #716959;
+}
+
+
+/* Common styles for overlay and modal type (fixed morph) */
+/* 按钮位置和大小，不影响弹出 */
+.morph-button-fixed,
+.morph-button-fixed .morph-content {
+	/* margin-left: 1060px;
+	margin-top: 140px;
+	width: 300px;
+	height: 30px; */
+	height: 40px;
+}
+
+/* 按钮显示比例，不影响弹出 */
+.morph-button-fixed > button{
+	z-index: 1000;
+	width: 100%;
+	height: 100%;
+	-webkit-transition: opacity 0.1s 0.5s;
+	transition: opacity 0.1s 0.5s;
+}
+
+/* 不影响弹出 */
+.morph-button-fixed.open > button{
+	opacity: 0;
+	-webkit-transition: opacity 0.1s;
+	transition: opacity 0.1s;
+}
+
+/* 不影响弹出,弹出位置改变 */
+.morph-button-fixed .morph-content {
+	position: fixed;
+	z-index: 900;
+	opacity: 0;
+	-webkit-transition: opacity 0.3s 0.5s, width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, left 0.4s 0.1s, margin 0.4s 0.1s;
+	transition: opacity 0.3s 0.5s, width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, left 0.4s 0.1s, margin 0.4s 0.1s;
+}
+
+/* 设置弹框背景颜色,弧度,透明度 */
+.morph-button-fixed.open .morph-content {
+	background: white;
+	border-radius: 20px;
+	opacity: 0.9;
+	overflow-y:auto;
+}
+
+/* 不影响弹出 */
+.morph-button-fixed.active .morph-content{
+	z-index: 1900;
+}
+
+
+ /* 不影响弹出 */
+.morph-button-modal .morph-content {
+	overflow: hidden;
+	-webkit-transition: opacity 0.3s 0.5s, width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, left 0.4s 0.1s, margin 0.4s 0.1s;
+	transition: opacity 0.3s 0.5s, width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, left 0.4s 0.1s, margin 0.4s 0.1s;
+}
+
+/* 不影响弹出,弹出位置改变 */
+.morph-button-modal.open .morph-content {
+	top: 50% !important;
+	left: 46% !important;
+	/* margin: -240px 0 0 -300px; */
+	margin: -18% 0 0 -300px;
+	width: 600px;
+	height: 420px;
+	-webkit-transition: width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, left 0.4s 0.1s, margin 0.4s 0.1s;
+	transition: width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, left 0.4s 0.1s, margin 0.4s 0.1s;
+}
+
+/* 改变弹框位置、大小 */
+.morph-button-modal-3.open .morph-content {
+	/* margin: -255px 0 0 -300px; */
+	/* width: 400px; */
+	margin-left: -13%;
+	margin-bottom:30%;
+	width:50%;
+	height: 480px;
+	overflow:auto;
+}

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ReaderRegister</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="Submit">
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+</script>
+		<link href="../static/css/librarian_lstyle.css" rel='stylesheet' type='text/css' />
+		<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" />
+	<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+	<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+		<link type="text/css" rel="stylesheet" href="../static/css/librarian_style.css" />
+		<link type="text/css" rel="stylesheet" href="../static/css/librarian_home.css" />
+
+<script src="../static/js/modernizr.custom.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/component_addbook.css" />
+	<link rel="stylesheet" type="text/css" href="../static/css/content_addbook.css" />
+
+    <script type="text/javascript">
+
+    function doPrint() {
+        winnew = window.open("", "")
+        bdhtml = window.document.body.innerHTML;
+        sprnstr = "<!--startprint-->"; //开始打印标识字符串有17个字符
+        eprnstr = "<!--endprint-->"; //结束打印标识字符串
+        prnhtml = bdhtml.substr(bdhtml.indexOf(sprnstr) + 17); //从开始打    印标识之后的内容
+        prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr)); //截取开始标识和结束标识之间的内容
+        winnew.document.body.innerHTML = prnhtml; //把需要打印的指定内容赋给body.innerHTML
+        winnew.print(); //调用浏览器的打印功能打印指定区域
+    }
+</script>
+<!--fonts--> 
+<!-- <style>
+	.menu_list {
+	width: 17%;
+	height: 70%;
+	
+	margin: 0;
+	border-radius: 20px;
+	border:1px solid #FFFFFF;
+	
+	
+	position: 'relative';
+	float: left ;
+	margin-right: -3px;
+	}
+	.function{
+		
+		margin: 0 100px;
+		float: right ;
+	}
+    a{ text-decoration:none; 
+	margin-left: 1px;}
+	a:hover{ text-decoration:underline; } 
+	.rest{
+		
+	}
+
+	.sub_menue
+	{
+	display:none; 
+	             
+	}
+	li:hover .sub_menue
+	{
+	display:block;  
+	          
+	}
+	</style> -->
+</head>
+<body>
+{% if bar %}
+    <script type="text/javascript">
+			(function() {
+				winnew = window.open("", "")
+                winnew.document.body.innerHTML = "<img src='http://127.0.0.1:8000/static/images/bar.png'>" ; //把需要打印的指定内容赋给body.innerHTML
+                setTimeout(function () {
+                    winnew.print();//调用浏览器的打印功能打印指定区域
+                },100)
+
+			})();
+		</script>
+{% endif %}
+
+	
+	<nav class="navbar navbar-transparent" role="navigation">
+  		<div class="container-fluid">
+    		<div class="nav navbar-nav librarian_header_img">
+      			<img src="../static/images/lo.png" alt="logo" width="200px" />
+    		</div>
+    		<ul class="nav navbar-nav navbar-right librarian_header_right">
+      			<!--<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>username</a></li>-->
+      			<li class="dropdown">
+      				<a href="#">
+      					<span class="glyphicon glyphicon-user"></span>
+      					<span>{{login}}</span>
+      					<span class="caret"></span>
+      				</a>
+					<ul class="dropdown-menu">
+						<li><a href="{% url 'librarian_changepwd' %}"><span class="glyphicon glyphicon-cog"></span><span style="margin-left: 5px;">Change Password</span></a></li>
+						<li><a href="{% url 'librarian_home' %}"><span class="glyphicon glyphicon-home"></span><span style="margin-left: 5px;">Return Homepage</span></a></li>
+						<li><a href="{% url 'homepage' %}"><span class="glyphicon glyphicon-log-out"></span><span style="margin-left: 5px;">Logout</span></a></li>
+					</ul>
+				</li>
+    		</ul>
+  		</div>
+	</nav>
+	
+	<div id="Bibliosoft" class="container-fluid librarian_menu">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="nav nav-tabs nav-stacked menu_list" style="list-style-type: none;">
+					<li><a href="{% url 'librarian_managebook' %}"><span>Manage Books</span></a></li>
+					<li><a href="{% url 'librarian_lend' %}"><span>Lend Book</span></a></li>
+					<li><a href="{% url 'librarian_return' %}"><span>Return Book</span></a></li>
+					<!--<li><button type="button" value="{% url 'librarian_addcategory' %}" class="menu_button">Add Category</button></li>-->
+					<li>
+						<a href="#ReaderSetting" class="nav-header collapsed" data-toggle="collapse">
+							<span>Reader Setting</span>
+							<span class="pull-right glyphicon glyphicon-chevron-down"></span>
+						</a>
+						<ul id="ReaderSetting" class="nav nav-list collapse menu_submenu" style="height: 0px;">
+							<li><a href="{% url 'librarian_managereader' %}"><span>Manage Reader</span></a></li>
+							<li class="li_active"><a href="{% url 'librarian_addreader' %}"><span>Reader Register</span></a></li>
+						</ul>
+					</li>
+					<li><a href="{% url 'librarian_checkincome' %}"><span>Check Income</span></a></li>
+					<li><a href="{% url 'librarian_post' %}"><span>Edit Post</span></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+		<div class="login-section">
+	        <div class="login-w3l">	
+	   
+							<h1 class="sub-head-w3-agileits">Reader Register</h1>
+							<br>
+						<div class="login-form">	
+							<!--<h3 class="sub-head-w3-agileits">Old Password</h3>-->
+							<form action = "{% url 'librarian_addreader' %}" method="post">
+								<input type="text" class="user" name="username" placeholder="ID"required="" />
+										<!--<h4 class="sub-head-w3-agileits">New Password</h4>-->
+								<input type="text" class="lock" name="email" placeholder="Email"required="" />
+                                <input type="text" class="lock" name="name" placeholder="Name"required="" />
+								<select name="sex"style="background:whitesmoke;
+    color: #000000;
+    border: 2px solid #FFFFFF;
+    font-size: 26px;
+   /* border: none;*/
+    text-transform: capitalize;
+    border-radius: 10px;
+    width: 25%;">
+                                    <option value="male">male</option>
+                                    <option value="female">female</option>
+                                </select>
+								<input type="submit" name="submit" value="Register" >
+							</form>	
+							</div>
+					<div class="clear"></div>
+				</div> 
+				</div>
+
+        <div style="font-size:26px;font-weight:normal;color:#000000;">{{ ans }}</div>
+        <nav class="navbar navbar-transparent navbar-fixed-bottom librarian_bottom_bg" role="navigation">
+    	<div class="container-fluid">
+		    <ul class="nav navbar-nav navbar-right librarian_bottom_right">
+		        <li><a href="#">Group Information</a></li>
+                <li>
+      				<a href="#" data-toggle="tooltip" data-placement="top" title="1071906198@qq.com">Contact us</a>
+				</li>
+		    </ul>
+    	</div>
+	</nav>
+	
+	<script>
+		$(function () { $("[data-toggle='tooltip']").tooltip(); });
+	</script>
+    
+    <script src="../static/js/classie.js"></script>
+    <script src="../static/js/uiMorphingButton_fixed.js"></script>
+    <script>
+        (function() {
+            var docElem = window.document.documentElement, didScroll, scrollPosition;
+    
+            // trick to prevent scrolling when opening/closing button
+            function noScrollFn() {
+                window.scrollTo( scrollPosition ? scrollPosition.x : 0, scrollPosition ? scrollPosition.y : 0 );
+            }
+    
+            function noScroll() {
+                window.removeEventListener( 'scroll', scrollHandler );
+                window.addEventListener( 'scroll', noScrollFn );
+            }
+    
+            function scrollFn() {
+                window.addEventListener( 'scroll', scrollHandler );
+            }
+    
+            function canScroll() {
+                window.removeEventListener( 'scroll', noScrollFn );
+                scrollFn();
+            }
+    
+            function scrollHandler() {
+                if( !didScroll ) {
+                    didScroll = true;
+                    setTimeout( function() { scrollPage(); }, 60 );
+                }
+            };
+    
+            function scrollPage() {
+                scrollPosition = { x : window.pageXOffset || docElem.scrollLeft, y : window.pageYOffset || docElem.scrollTop };
+                didScroll = false;
+            };
+    
+            scrollFn();
+    
+            [].slice.call( document.querySelectorAll( '.morph-button' ) ).forEach( function( bttn ) {
+                new UIMorphingButton( bttn, {
+                    closeEl : '.icon-close',
+                    onBeforeOpen : function() {
+                        // don't allow to scroll
+                        noScroll();
+                    },
+                    onAfterOpen : function() {
+                        // can scroll again
+                        canScroll();
+                    },
+                    onBeforeClose : function() {
+                        // don't allow to scroll
+                        noScroll();
+                    },
+                    onAfterClose : function() {
+                        // can scroll again
+                        canScroll();
+                    }
+                } );
+            } );
+    
+            // for demo purposes only
+            [].slice.call( document.querySelectorAll( 'form button' ) ).forEach( function( bttn ) {
+                bttn.addEventListener( 'click', function( ev ) { ev.preventDefault(); } );
+            } );
+        })();
+    </script>
+</body>
+</html>
+
+    
+        

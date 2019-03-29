@@ -1,0 +1,50 @@
+
+/* 弹框中表格样式 */
+.managereader_table {
+	border:0px;
+	/* margin-left: 280px; */
+	/* margin-left: 13%; */
+	/* margin-top:100px; */
+	/* margin-top: 5%; */
+	height: 15%;
+	/* width: 700px; */
+	width: 100%;
+	opacity:0.9;
+	border-collapse: collapse;
+}
+ .managereader_table thead tr th {font-size: 17px; color: black;  text-align: center; background-color:#e6e8fa; font-weight:bold;} 
+ .managereader_table td{line-height: 20px; text-align: center; padding: 4px 10px 3px 10px; height: 18px;border: 0px solid #ffffff;} 
+.managereader_table tbody tr th{background: #fff; font-size: 13px; color: #393939;}
+.managereader_table tbody tr:nth-child(2n){ background: #f3f3f3;}
+/*表格样式*/
+
+/* managebook表格样式 */
+/* .managebook_table {
+	border:0px;
+	 margin-left: 380px;
+	margin-top: 8%;
+	height: 100px;
+	width: 1000px;
+	opacity:0.9;
+	border-collapse: collapse;
+}
+.managebook_table thead tr th{font-size: 17px; color: black;  text-align: center; background-color:#e6e8fa; font-weight:bold;}
+.managebook_table td{line-height: 20px; text-align: center; padding: 4px 10px 3px 10px; height: 18px;border: 0px solid #ffffff;}
+.managebook_table tbody tr {background: #fff; font-size: 13px; color: #393939;}
+.managebook_table tbody tr:nth-child(2n){ background: #f3f3f3;} */
+/*表格样式*/
+
+/* .librarian_table {
+	border:0px;
+	margin-left: 280px;
+	margin-top:100px;
+	height: 100px;
+	width: 1000px;
+	opacity:0.9;
+	border-collapse: collapse;
+}
+.managebook_table thead tr th{font-size: 17px; color: black;  text-align: center; background-color:#e6e8fa; font-weight:bold;}
+.managebook_table td{line-height: 20px; text-align: center; padding: 4px 10px 3px 10px; height: 18px;border: 0px solid #ffffff;}
+.managebook_table tbody tr {background: #fff; font-size: 13px; color: #393939;}
+.managebook_table tbody tr:nth-child(2n){ background: #f3f3f3;} */
+/*表格样式*/

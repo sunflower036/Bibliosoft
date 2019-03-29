@@ -1,0 +1,216 @@
+body{
+    	background-size: cover;
+    	background-repeat: no-repeat;
+}
+body::-webkit-scrollbar{
+	display:none;
+}
+
+.homepage_header_img{
+	margin: 30px 0 0 30px;
+	filter:alpha(Opacity=80);
+  	-moz-opacity:0.8;
+  	opacity: 0.8;
+}
+.homepage_header_right{
+	padding: 25px 35px 0 0;
+}
+
+.homepage_bottom_bg {
+	background-color: transparent;
+	background: rgba(0, 0, 0, 0.20);
+}
+.homepage_bottom_right {
+	padding: 0 50px 0 0;
+}
+.homepage_bottom_right > li > a {
+	color: #999999;
+}
+.homepage_bottom_right > li > a:hover {
+	background: rgba(248, 248, 248, 0.30);
+	color: #999999;
+}
+
+
+.div_login_outer {
+    width: 800px;
+    margin: 0 auto;
+}
+.div_login {
+	height: 430px;
+	margin-top: 50px;
+	background : rgba(0, 0, 0, 0.30);
+	border-radius: 16px;
+	padding-top: 20px;
+}
+
+.div_login_title {
+	color: #AB2418;
+	text-align: center;
+	font-family: georgia ;
+	font-size: 40px;
+	font-weight: 600;
+	filter:alpha(Opacity=80);
+  	-moz-opacity:0.8;
+  	opacity: 0.8;
+}
+
+.div_form_outer {
+	width: 380px;
+    margin: 0 auto;
+    text-align: center;
+}
+.div_login_password {
+	width: 240px;
+	float: left;
+}
+.div_login_select {
+	width: 106px;
+	float: right;
+}
+
+.div_marginauto {
+	margin: 0 auto;
+}
+.div_form_group {
+	margin-top: 25px;
+	margin-left: 20px ;
+	text-align: center;
+}
+.div_form_group_hide {
+	margin-top: 25px;
+	margin-left: 20px ;
+	text-align: center;
+	padding-right: 30px;
+}
+.div_hidden {
+	margin-top: 25px;
+	margin-left: 20px ;
+	text-align: center;
+	padding-right: 40px;
+}
+.hp_btn_login {
+	width: 100px;
+	text-align: center;
+	margin-right: 1px;
+}
+.hp_btn_change {
+	width: 200px;
+	text-align: center;
+}
+
+.admin_login_div {
+	display: none;
+	position: absolute;   
+	top: 170px;
+ 	left:470px;  
+ 	width: 600px;  
+ 	height: 300px;
+ 	padding: 6px 16px;  
+	background : rgba(255, 255, 255, 1.00); 
+ 	border-radius: 17px;
+}
+.admin_show_btn {
+	float: right;
+	margin: 50px 0 0 0;
+	background: transparent;
+	outline:none;
+	border-style: hidden;
+	filter:alpha(Opacity=20);
+  	-moz-opacity:0.2;
+  	opacity: 0.2;
+}
+.admin_show_btn:hover, .admin_show_btn:focus, .admin_show_btn:active, .admin_show_btn:active:hover {
+	background: rgba(248, 248, 248, 0.20);
+	outline:none;
+	border-style: hidden;
+}
+.admin_login_hide {
+	width: 800px;
+	height: 100px;
+	display: none;
+	margin-top: 2px;
+	text-align: center;
+	background : rgba(0, 0, 0, 0.30);
+	border-radius: 16px;
+	padding: 5px;
+	float: right;
+}
+
+#btn_div2 {
+	display: none;
+}
+
+
+.post_img_position {
+	position: absolute;
+	top: 610px;
+	left: 34px;
+	width: 74px;
+	height: 74px;
+}
+.post_img_shape {
+	background: rgba(0, 0, 0, 0.30);
+	border-radius: 37px ;
+}
+.post_hide_position {
+	position: absolute;
+	top: 150px;
+	left: 100px;
+	width: 320px;
+	height: 490px;
+	background: rgba(15, 15, 15, 0.80);
+	border-radius: 15px ;
+	padding: 0 20px 0 20px;
+	display: none;
+}
+.post_div_text {
+	font-size: 20px;
+	color: #969696;
+	margin: 10px;
+	padding: 10px;
+	border-bottom: 1px dashed #8D8D8D;
+}
+
+.hide_ans{
+	margin: 10px 0 10px 10px;
+	font-size: 20px;
+	color: #F8F8F8;
+	text-align: center;
+	filter:alpha(Opacity=60);
+  	-moz-opacity:0.6;
+  	opacity: 0.6;
+}
+
+.post_hide {
+	background:rgba(30, 30, 30, 0.70);
+}
+
+.post_hide_title_text {
+	font-size: 25px;
+	text-align: center;
+	color: white;
+}
+.post_hide_content {
+	height: 500px;
+	word-wrap:break-word;
+    word-break:break-all;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+.post_hide_content_sub {
+	color: #CCCCCC;
+	font-size: 13px;
+	font-weight: 200;
+	margin-right: 10px;
+	filter:alpha(Opacity=60);
+  	-moz-opacity:0.6;
+  	opacity: 0.6;
+}
+.post_hide_content_text {
+	margin-top: 10px;
+	color: #F8F8F8;
+	filter:alpha(Opacity=80);
+  	-moz-opacity:0.8;
+  	opacity: 0.8;
+}

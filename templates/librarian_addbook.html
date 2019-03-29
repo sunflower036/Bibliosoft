@@ -1,0 +1,265 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<title>AddBook</title>
+	<link type="text/css" rel="stylesheet" charset="utf-8" href="../static/css/manage_style.css" />
+	<link rel="stylesheet" type="text/css" href="../static/css/blackwindow.css">
+	<link href="../static/css/librarian_lend&return.css" rel='stylesheet' type='text/css' />
+	<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" />
+	<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+	<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<link type="text/css" rel="stylesheet" charset="utf-8" href="../static/css/librarian_style.css" />
+	<!-- <link href="../static/css/bootstrap.min.css" rel="stylesheet" /> -->
+	<!-- 选项卡 -->
+	<link href="../static/css/material-bootstrap-wizard.css" rel="stylesheet" />
+	<script src="../static/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="../static/js/jquery.bootstrap.js" type="text/javascript"></script>
+	<script src="../static/js/material-bootstrap-wizard.js"></script>
+	<script src="../static/js/jquery.validate.min.js"></script>
+<script>  
+    function show(tag){  
+    var light=document.getElementById(tag);  
+    light.style.display='block';  
+    $("#fade").css('display','block');  
+	$("#try").css('z-index','-1');
+    }  
+    function hide(tag){  
+    var light=document.getElementById(tag);  
+    light.style.display='none';  
+    $("#fade").css('display','none');  
+	$("#try").css('z-index','1000');
+    }
+</script>
+</head>
+<body>
+{% if new_book %}
+    <script type="text/javascript">
+			(function() {
+				winnew = window.open("", "")
+                winnew.document.body.innerHTML = "{% for book in new_book %}\n"+
+                    "            <div>\n"+
+                    "                <img src=\"http://127.0.0.1:8000/static/images/{{ book }}.png\">\n"+
+                    "            </div>\n"+
+                    "    {% endfor %}" ; //把需要打印的指定内容赋给body.innerHTML
+                setTimeout(function () {
+                    winnew.print();//调用浏览器的打印功能打印指定区域
+                },200)
+
+			})();
+		</script>
+{% endif %}
+	<nav class="navbar navbar-transparent" role="navigation">
+  		<div class="container-fluid">
+    		<div class="nav navbar-nav librarian_header_img">
+      			<img src="../static/images/lo.png" alt="logo" width="200px" />
+    		</div>
+    		<ul class="nav navbar-nav navbar-right librarian_header_right">
+      			<!--<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>username</a></li>-->
+      			<li class="dropdown">
+      				<a href="#">
+      					<span class="glyphicon glyphicon-user"></span>
+      					<span>{{login}}</span>
+      					<span class="caret"></span>
+      				</a>
+					<ul class="dropdown-menu">
+						<li><a href="{% url 'librarian_changepwd' %}"><span class="glyphicon glyphicon-cog"></span><span style="margin-left: 5px;">Change Password</span></a></li>
+						<li><a href="{% url 'librarian_home' %}"><span class="glyphicon glyphicon-home"></span><span style="margin-left: 5px;">Return Homepage</span></a></li>
+						<li><a href="{% url 'homepage' %}"><span class="glyphicon glyphicon-log-out"></span><span style="margin-left: 5px;">Logout</span></a></li>
+					</ul>
+				</li>
+    		</ul>
+  		</div>
+	</nav>
+    
+    <div id="Bibliosoft" class="container-fluid librarian_menu">
+    	<div class="row">
+    		<div class="col-md-12">
+    			<ul class="nav nav-tabs nav-stacked menu_list" style="list-style-type: none;">
+					<li>
+						<a href="#ManageBooks" class="nav-header collapsed" data-toggle="collapse">
+							<span>Manage Books</span>
+							<span class="pull-right glyphicon glyphicon-chevron-down"></span>
+						</a>
+						<ul id="ManageBooks" class="nav nav-list collapse" style="height: 0px;">
+							<li class="li_active"><a href="{% url 'librarian_addbook' %}" class="submenu_add"><span>Add Books</span></a></li>
+							<li>
+								<button type="button" value="check delete list" class="button1" onclick="show('check')">Check Delete List</button>
+									<div id="check" class="black_content">  
+										<div class="close">
+											<a href="javascript:void(0)" onclick="hide('check')" style="text-decoration: none; color: white; font-size: 30px;">×</a>
+										</div> 
+											<div class="title">Check Delete List</div>
+												<div class="white_content">
+													<table class="managereader_table">
+														<thead>
+															<tr>
+																<th>book name</th>
+																<th>book id</th>
+																<th>delete librarian</th>
+															</tr>
+														</thead>
+														<tbody>
+															{% for item in deletelist %}
+																<tr>
+																	<td>{{ item.book_name }}</td>
+																	<td>{{ item.book_id }}</td>
+																	<td>{{ item.librarian_id }}</td>
+																</tr>
+															{% endfor %}
+														</tbody>
+													</table>
+												</div>	
+									</div>
+							</li>
+						</ul>
+					</li>
+    				<li><a href="{% url 'librarian_lend' %}"><span>Lend Book</span></a></li>
+    				<li><a href="{% url 'librarian_return' %}"><span>Return Book</span></a></li>
+    				<li>
+    					<a href="#ReaderSetting" class="nav-header collapsed" data-toggle="collapse">
+    						<span>Reader Setting</span>
+    						<span class="pull-right glyphicon glyphicon-chevron-down"></span>
+    					</a>
+    					<ul id="ReaderSetting" class="nav nav-list collapse menu_submenu" style="height: 0px;">
+    						<li><a href="{% url 'librarian_managereader' %}"><span>Manage Reader</span></a></li>
+    						<li><a href="{% url 'librarian_addreader' %}"><span>Reader Register</span></a></li>
+    					</ul>
+    				</li>
+    				<li><a href="{% url 'librarian_checkincome' %}"><span>Check Income</span></a></li>
+    				<li><a href="{% url 'librarian_post' %}"><span>Edit Post</span></a></li>
+    			</ul>
+    		</div>
+    	</div>
+    </div>
+	<div class="container">
+		<div class="row">
+			<div id="try" class="col-sm-8 col-sm-offset-2">
+				<div class="wizard-container">
+					<div class="card wizard-card" data-color="red" id="wizard">
+						<a href="{% url 'librarian_managebook' %}"><button class="back" style="margin-left:-85%;border: none; width:100px;height:30px; background:url(../static/images/back.png) no-repeat center ;"></button></a>
+							<div class="wizard-header">
+								<h1 class="wizard-title">Add Book</h1>
+                                <div style="font-size:26px;color:#000000;">{{ ans }}</div>
+							</div>
+							<div class="wizard-navigation">
+								<ul>
+									<li><a href="#add_with" data-toggle="tab">Add With ISBN</a></li>
+									<li><a href="#add_without" data-toggle="tab">Add Without ISBN</a></li>
+								</ul>
+							</div>
+							<div class="tab-content">
+								<div class="tab-pane" id="add_with">
+									<form action = "{% url 'librarian_addbook' %}" method="post">
+											<p><label>ISBN</label><label1></label1><input type="text" placeholder="ISBN" name="ISBN"/></p>
+											<p><label>floor</label><label1></label1><input type="text" placeholder="floor" name="floor"/></p>
+											<p><label>shelf</label><label1></label1><input type="text" placeholder="shelf" name="shelf"/></p>
+											<p><label>area</label><label1></label1><input type="text" placeholder="area" name="area"/></p>
+											<p><label>category</label><label></label>
+											<select name="category" id="addselect1" onchange="changeSelect1()">
+												{% for item in categories %}
+													<option value={{ item.name }}>{{ item.name }}</option>
+												{% endfor %}
+												<option value='new' id="change1">
+													Add...
+												</option>
+											</select>
+                                            <p id="hideP1" style="display: none;"><label1></label1><input type="text" placeholder="add category" name="newcategory"/></p>
+                                            <p id="hideP2" style="display: none;"><input type="submit" value="add category" name="with_addcategory"/></p>
+											<p><label2>You want to add <input type="text" name="num" value="1" style="width:60px; font-size: 16px;"> copy(s)</label2></p>
+											<p><input type="submit" value="add" name="withISBN"/></p>
+										</form>
+								</div>
+
+								<div class="tab-pane" id="add_without">
+									<form action = "{% url 'librarian_addbook' %}" enctype="multipart/form-data" method="post">
+											<p><label>bookname</label><label1></label1><input type="text" placeholder="bookname" name="bookname"/></p>
+											<p><label>floor</label><label1></label1><input type="text" placeholder="floor" name="floor"/></p>
+											<p><label>shelf</label><label1></label1><input type="text" placeholder="shelf" name="shelf"/></p>
+											<p><label>area</label><label1></label1><input type="text" placeholder="area" name="area"/></p>
+											<p><label>price</label><label1></label1><input type="text" placeholder="price" name="price"/></p>
+											<p><label>category</label><label></label>
+											<select name="category" id="addselect2" onchange="changeSelect2()">
+												{% for item in categories %}
+													<option value={{ item.name }}>{{ item.name }}</option>
+												{% endfor %}
+												<option value='new' id="change2">
+													Add...
+												</option>
+											</select>
+                                            <p id="hideP3" style="display: none;"><label1></label1><input type="text" placeholder="add category" name="newcategory"/></p>
+                                            <p id="hideP4" style="display: none;"><input type="submit" value="add category" name="without_addcategory"/></p>
+                                            <p><label>description</label><label1></label1>
+                                            <textarea name="description" id="text" cols="30" rows="10">
+                                            </textarea>
+                                            </p>
+											<div class="picture-container">
+												<div class="col-sm-6">
+													<label>Choose book picture</label>
+												</div>
+													<div class="picture">
+														<img src="../static/images/upload_book.png" class="picture-src" id="wizardPicturePreview" title=""/>
+															<input type="file" name="img" id="wizard-picture">
+															<div>Choose Picture</div>
+													</div>
+													
+											</div>
+											<br />
+											<p><label2>You want to add <input type="text" name="num" value="1" style="width:60px; font-size: 16px;"> copy(s)</label2></p>
+											<p><input type="submit" value="add" name="withoutISBN"/></p>
+										</form>
+								</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<nav class="navbar navbar-transparent navbar-fixed-bottom librarian_bottom_bg" role="navigation">
+    	<div class="container-fluid">
+		    <ul class="nav navbar-nav navbar-right librarian_bottom_right">
+		        <li><a href="#">Group Information</a></li>
+                <li>
+      				<a href="#" data-toggle="tooltip" data-placement="top" title="1071906198@qq.com">Contact us</a>
+				</li>
+		    </ul>
+    	</div>
+	</nav>
+	
+	<script>
+		$(function () { $("[data-toggle='tooltip']").tooltip(); });
+	</script>
+	
+	<script>
+    function changeSelect1() {
+            var addSelect = document.getElementById("addselect1");
+            var addOption = addSelect.value;
+            var P1 = document.getElementById("hideP1");
+            var P2 = document.getElementById("hideP2");
+            if(addOption == "new"){
+            	P1.style.display = "block";
+            	P2.style.display = "block";
+            }
+            else {
+            	P1.style.display = "none";
+            	P2.style.display = "none";
+            }
+        }
+	</script>
+	<script>
+    function changeSelect2() {
+            var addSelect = document.getElementById("addselect2");
+            var addOption = addSelect.value;
+            var P3 = document.getElementById("hideP3");
+            var P4 = document.getElementById("hideP4");
+            if(addOption == "new"){
+            	P3.style.display = "block";
+            	P4.style.display = "block";
+            }
+            else {
+            	P3.style.display = "none";
+            	P4.style.display = "none";
+            }
+        }
+	</script>
+</body>
+</html>

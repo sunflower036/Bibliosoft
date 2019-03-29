@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AdminRequest</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="Submit">
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+	</script>
+	<script src="../static/js/fanye.js"></script>
+	<link type="text/css" rel="stylesheet" href="../static/css/librarian_editbook.css" />
+	<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" />
+	<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+	<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../static/css/admin_home.css" />
+	<script src="../static/js/modernizr-2.6.2.min.js"></script>
+	<link href="../static/css/admin_style.css" rel='stylesheet' type='text/css' />
+    <style>
+    	.norequest {
+    		width: 400px;
+    		vertical-align: middle;
+    		font-size: 25px; 
+    		margin: 180px 0 0 680px; 
+    		color: #4B4B4B; 
+    		padding: 30px; 
+    		background: rgba(248, 248, 248, 0.60);
+    		text-align: center;
+    		border-radius: 12px;
+    	}
+    </style>
+    <script>
+    	$(function(){    
+            var ansHide = $("#ans_hide").html();    
+            if(ansHide == null || ansHide.length == 0)  
+	        {  
+	            $("#ans_hide").css("display", "none"); 
+	        }
+    	}); 
+    </script>
+</head>
+<body background="../static/images/backward_rev.png" onload ="goPage(1,4);">
+	<nav class="navbar navbar-transparent" role="navigation">
+  		<div class="container-fluid">
+    		<div class="nav navbar-nav admin_header_img">
+      			<img src="../static/images/lob.png" alt="logo"style="width: 200px;"/>
+    		</div>
+    		<ul class="nav navbar-nav navbar-right admin_header_right">
+      			<li class="dropdown">
+      				<a class="admin_header_right_drop" href="#">
+      					<span class="glyphicon glyphicon-user"></span>
+      					<span>{{login}}</span>
+      					<span class="caret"></span>
+      				</a>
+					<ul class="dropdown-menu">
+						<li><a href="{% url 'admin_changeinfo' %}"><span class="glyphicon glyphicon-cog"></span><span style="margin-left: 5px;">Change Imformation</span></a></li>
+						<li><a href="{% url 'admin_home' %}"><span class="glyphicon glyphicon-home"></span><span style="margin-left: 5px;">Return Homepage</span></a></li>
+						<li><a href="{% url 'homepage' %}"><span class="glyphicon glyphicon-log-out"></span><span style="margin-left: 5px;">Logout</span></a></li>
+					</ul>
+				</li>
+    		</ul>
+  		</div>
+	</nav>
+	<div id="Bibliosoft" class="container-fluid admin_menu">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="nav nav-tabs nav-stacked menu_list" style="list-style-type: none;">
+					<li><a href="{% url 'admin_manage' %}"><span>Manage Librarian</span></a></li>
+					<li><a href="{% url 'admin_addlibrarian' %}"><span>Librarian Register</span></a></li>
+					<li><a href="{% url 'admin_defaultvalue' %}"><span>Set Book Related Regulation</span></a></li>
+					<li class="li_active"><a href="{% url 'admin_request' %}"><span>Process Reset Password Request</span></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!--<div style="font-size:26px;margin-left:35%; font-weight:normal;color:#000000;">{{ ans }}</div>-->
+	<div id="ans_hide" class="norequest">{{ans}}</div>
+	
+	{% if request_list %}
+	<div class="div_default" style="margin-left: 22%; margin-top: 6%; width: 70%;">
+		<div class="div_title">
+			<span>Process Reset Password Request</span>
+		</div>
+		<div id="div1" class="div_height1" style="height: auto;padding-bottom: 2%;width: 95%;">	
+			<table id="idData" class="librarian_table" style="margin-left: 0%;margin-top: 0%;padding-bottom: 10px;">
+				<thead>
+					<th style="text-align: center;">librarian id</th>
+					<th style="text-align: center;">agree</th>
+					<th style="text-align: center;">refuse</th>
+				</thead>
+				<tbody>
+					{% for item in request_list %}
+						<tr>
+							{% if item.isrequest == '1' %}
+							<td>{{ item.id }}</td>
+							<td>
+								<form action="{% url 'admin_request' %}" method="post">
+									<script type="text/javascript">
+										function confirmAgreement() {
+											return confirm("Are you sure to agree?");
+										}
+									</script>
+									<input type="text" name="librarian id" value="{{ item.id }}" hidden>
+									<input type="submit" name="agree" value="" style=" border: none; width:100px;height:30px; background:url(../static/images/agree.png) no-repeat center ;" onclick="return confirmAgreement();">
+								</form>
+							</td>
+							<td>
+								<form action="{% url 'admin_request' %}" method="post">
+									<script type="text/javascript">
+										function confirmDisagreement() {
+											return confirm("Are you sure to refuse?");
+										}
+									</script>
+									<input type="text" name="librarian id" value="{{ item.id }}" hidden>
+									<input type="submit" name="refuse" value="" style=" border: none; width:100px;height:30px; background:url(../static/images/refuse.png) no-repeat center ;" onclick="return confirmDisagreement();">
+								</form>
+							</td>
+							{% endif %} 
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		<table class="librarian_table" style="height: auto;margin-left: 0px;">
+			<tr><td><div id="barcon" name="barcon"></div></td></tr>
+		</table> 
+		</div>
+	</div> 
+	{% endif %}
+	
+	<nav class="navbar navbar-transparent navbar-fixed-bottom admin_bottom_bg" role="navigation">
+    	<div class="container-fluid">
+		    <ul class="nav navbar-nav navbar-right admin_bottom_right">
+		        <li><a href="#">Group Information</a></li>
+                <li>
+      				<a href="#" data-toggle="tooltip" data-placement="top" title="1071906198@qq.com">Contact us</a>
+				</li>
+		    </ul>
+    	</div>
+	</nav>
+	
+	<script>
+		$(function () { $("[data-toggle='tooltip']").tooltip(); });
+	</script> 
+</body>
+</html>

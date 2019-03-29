@@ -1,0 +1,27 @@
+.wizard-container {
+  /* padding-top: 100px; */
+  z-index: 3;
+}
+.wizard-container .wizard-navigation {
+  position: relative;
+}
+
+/* 整个add book框 */
+.card {
+  background-color: #FFFFFF;
+  padding: 10px 0;
+  width: 80%;
+  border-radius: 6px;
+  color: rgba(0,0,0, 0.87);
+  background: #fff;
+	margin-left: 0%;
+	margin-top: -60px;
+	opacity: 0.85;
+}
+
+.wizard-card {
+  min-height: 520px;
+	height: 100%;
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+

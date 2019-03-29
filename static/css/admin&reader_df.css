@@ -1,0 +1,123 @@
+/*body {*/
+    /*font-family: 'Open Sans', sans-serif;*/
+    /*font-size: 100%;*/
+    /*background: url(../images/backward_rev.png)no-repeat 0px 0px;*/
+    /*background-size: cover;*/
+    /*background-attachment: fixed;*/
+    /*text-align: center;*/
+/*}*/
+
+	
+h1,h2,h3,h4,h5,h6{
+	font-family: 'Questrial', sans-serif;
+	font-weight: bold;
+}
+
+h1 {
+      text-align:left;    
+    font-size: 50px;
+   
+    letter-spacing: 5px;
+    color: #000000;
+    margin: 0.5em 0em;
+}
+
+label{
+    	display:block;
+    	float:left; 
+    	font-size:25px;
+    	font-weight:normal;
+    	color:#000000;
+    	margin:0px 0 6px 0;
+}
+    
+h2.sub-head-w3-agileits ,h3.sub-head-w3-agileits,h4.sub-head-w3-agileits  {
+    text-align:center;
+    /*font-weight:normal;*/
+    font-size: 33px;
+    text-transform: capitalize;
+    letter-spacing: 2px;
+    color: #000000;
+    margin:15px 0 20px 0;
+}
+
+.login-w3l{
+    width:60%;
+    padding: 30px 40px 20px 40px;
+	margin-left:600px;
+	border: 2px solid #000000;
+	border-radius:20px;
+	background: rgba(255, 255, 255, 0.40);
+}
+
+.login-form {
+	padding:0px 0px 0px 0px ;
+	 /*text-align: left;*/
+}
+.login-form input[type="password"]{
+	float:left;
+    display: block;
+    width:80%;
+    padding: 5px 15px;
+    border:  2px solid #000000;
+    outline: none;
+	color: #000000;
+	border-radius:8px;
+	height:38px;
+    font-size: 22px;
+	letter-spacing: 0px;
+	margin:0px 40px 20px 20px;
+	background:transparent;
+
+	}
+
+.login-form input[type="text"]{
+	float:left;
+    display: block;
+    width:80%;
+    padding: 5px 15px;
+    border:  2px solid #000000;
+    outline: none;
+	color: #000000;
+	border-radius:8px;
+	height:38px;
+    font-size: 22px;
+	letter-spacing: 0px;
+	margin:0px 40px 20px 20px;
+	background:transparent;
+	
+	}
+.login-form input[type="submit"] {
+    background:rgba(0,0,0,40%);
+    color: #000000;
+    border:2px solid #000000;
+    font-size: 24px;
+    font-weight:bold;
+    text-transform: capitalize;
+    border-radius: 10px;
+    width: 40%;
+    margin:20px 500px 20px 100px;
+    outline: none;
+    cursor: pointer;
+    float: center;
+    padding: 10px 0;
+}
+.login-section {
+    width: 57%;
+    margin-left:200px;
+}
+
+
+ ::-webkit-input-placeholder{
+	color:rgb(0,0,0,0.7);
+	font-size: 20px;
+}
+
+
+::-moz-placeholder {   Firefox 19+ 
+   color: #FFFFFF;  
+}
+:-ms-input-placeholder {  
+   color: #FFFFFF;  
+  
+}
